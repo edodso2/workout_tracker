@@ -1,14 +1,14 @@
 # Workout Tracker
 
-A simple workout tracker for tracking weighlifting workouts.
+A simple workout tracker for tracking weighlifting workouts. Built with Flutter.
 
 ## Features
 
 1. adding exercises
-2. creating workouts on a specified date
-3. adding exercises to the workout
-4. adding the number of sets and reps completed for the exercise
-5. persist exercises & workouts to disk
+2. creating workouts on a specified date (in progress)
+3. adding exercises to the workout (in progress)
+4. adding the number of sets and reps completed for the exercise (in progress)
+5. persist exercises & workouts to disk (in progress)
 
 
 Possible future features:
