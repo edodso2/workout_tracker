@@ -2,6 +2,12 @@
 
 A simple workout tracker for tracking weighlifting workouts. Built with Flutter.
 
+## Todo
+- Add workouts page
+- UI test for add workouts page
+- scenarios for worktouts page based on date
+- UI test for the scenarios
+
 ## Features
 
 1. adding exercises

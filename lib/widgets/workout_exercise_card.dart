@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 
-class WorkoutExercise extends StatelessWidget {
+import '../models/workout_exercise.dart';
+
+class WorkoutExerciseCard extends StatelessWidget {
+  final WorkoutExercise exercise;
+
+  WorkoutExerciseCard(this.exercise, {Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -11,7 +17,7 @@ class WorkoutExercise extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              'Deadlift',
+              exercise.name,
               textAlign: TextAlign.left,
             ),
             SizedBox(height: 10.0),

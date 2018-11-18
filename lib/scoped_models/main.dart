@@ -5,7 +5,7 @@ import '../services/exercise_service.dart';
 import '../models/exercise.dart';
 import './workouts.dart';
 
-
+// TODO: can the exercise model code be moved to seperate Class or file?
 class MainModel extends Model with WorkoutsModel {
   final ExerciseService exerciseService;
 

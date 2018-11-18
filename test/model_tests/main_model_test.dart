@@ -1,4 +1,4 @@
-import 'package:test/test.dart';
+import 'package:test_api/test_api.dart';
 import 'package:mockito/mockito.dart';
 import 'package:workout_tracker/models/exercise.dart';
 import 'package:workout_tracker/scoped_models/main.dart';

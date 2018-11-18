@@ -37,15 +37,18 @@ class App extends StatelessWidget {
     );
   }
 
-  _routeParamParser(RouteSettings settings) {
+  Route<dynamic> _routeParamParser(RouteSettings settings) {
     final List<String> pathElements = settings.name.split('/');
     if (pathElements[0] != '') {
       return null;
     }
     if (pathElements[1] == 'workouts') {
-      final int index = int.parse(pathElements[2]);
+      final int year = int.parse(pathElements[2]);
+      final int month = int.parse(pathElements[3]);
+      final int day = int.parse(pathElements[4]);
+
       return MaterialPageRoute<bool>(
-        builder: (BuildContext context) => WorkoutsPage(index),
+        builder: (BuildContext context) => WorkoutsPage(year: year, month: month, day: day),
       );
     }
     return null;
