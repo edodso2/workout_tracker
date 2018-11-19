@@ -42,6 +42,23 @@ void main() {
         expect(button, findsOneWidget);
       },
     );
+    testWidgets(
+      'should call createWorkout function when create button clicked',
+      (WidgetTester tester) async {
+        Widget mockApp = TestUtil.createMockApp(model, year, month, day);
+
+        when(model.getWorkoutOnDate(date)).thenReturn(-1);
+
+        await tester.pumpWidget(mockApp);
+
+        Key buttonKey = Key('createButton');
+        Finder button = find.byKey(buttonKey);
+
+        await tester.tap(button);
+
+        verify(model.createWorkout(date)).called(1);
+      },
+    );
   });
   group('Workout found', () {
     group('Exercises not found', () {

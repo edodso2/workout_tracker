@@ -38,7 +38,7 @@ class WorkoutsPage extends StatelessWidget {
           Widget child,
           MainModel model,
         ) {
-          final DateTime date = DateTime(year, month, day);
+          final date = DateTime(year, month, day);
           int index = model.getWorkoutOnDate(date);
 
           return Container(
@@ -49,7 +49,7 @@ class WorkoutsPage extends StatelessWidget {
                     model.workouts[index],
                     index,
                   )
-                : buildNoWorkouts(context),
+                : buildNoWorkouts(context, model, date),
           );
         },
       ),
@@ -91,7 +91,7 @@ class WorkoutsPage extends StatelessWidget {
   }
 
   /// Workout not found scenario widgets
-  Widget buildNoWorkouts(BuildContext context) {
+  Widget buildNoWorkouts(BuildContext context, MainModel model, DateTime date) {
     return Column(
       children: <Widget>[
         Expanded(
@@ -106,9 +106,7 @@ class WorkoutsPage extends StatelessWidget {
           textColor: Colors.white,
           child: Text('Create Workout'),
           onPressed: () {
-            // create a new workout. This should result in a re-render
-            // of this page and the page state should change. Widget test should
-            // be added for this when feature is added.
+            model.createWorkout(date);
           },
         ),
       ],
