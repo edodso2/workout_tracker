@@ -20,8 +20,11 @@ class _WorkoutCalendar extends State<WorkoutCalendar> {
       ) {
         return EventCalendar(
           onDateSelected: (DateTime date) {
-            final index = model.getWorkoutOnDate(date);
-            Navigator.pushNamed(context, '/workouts/$index');
+            final year = date.year;
+            final month = date.month;
+            final day = date.day;
+
+            Navigator.pushNamed(context, '/workouts/$year/$month/$day');
           },
         );
       },
