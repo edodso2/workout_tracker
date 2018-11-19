@@ -38,14 +38,14 @@ class App extends StatelessWidget {
     );
   }
 
-  _parseRouteParams(RouteSettings settings) {
+  Route<dynamic> _parseRouteParams(RouteSettings settings) {
     String workoutsPageRouteName = 'workouts';
     RouterParamParser parser = RouterParamParser([
       workoutsPageRouteName,
     ]);
     ParsedRoute route = parser.parse(settings);
 
-    if (route == null) return route;
+    if (route == null) return null;
   
     if (route.name == workoutsPageRouteName) {
       final int year = int.parse(route.params[0]);
@@ -57,5 +57,7 @@ class App extends StatelessWidget {
             WorkoutsPage(year: year, month: month, day: day),
       );
     }
+
+    return null;
   }
 }
