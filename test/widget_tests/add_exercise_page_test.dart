@@ -20,7 +20,7 @@ void main() {
 
     await tester.pumpWidget(mockApp);
 
-    Finder nameField = find.byKey(new Key('name'));
+    Finder nameField = find.byKey(Key('name'));
     await tester.enterText(nameField, 'Curls');
 
     await tester.tap(find.text('Add'));

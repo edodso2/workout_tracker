@@ -70,7 +70,7 @@ void main() {
         'should display add exercies button',
         (WidgetTester tester) async {
           // test is used twice so extracting into util function
-          TestUtil.checkForAddExerciseButton(tester, mockApp);
+          TestUtil.checkForAddExerciseWidget(tester, mockApp);
         },
       );
     });
@@ -111,7 +111,7 @@ void main() {
         'should display add exercies button',
         (WidgetTester tester) async {
           // test is used twice so extracting into util function
-          TestUtil.checkForAddExerciseButton(tester, mockApp);
+          TestUtil.checkForAddExerciseWidget(tester, mockApp);
         },
       );
     });
@@ -130,15 +130,15 @@ class TestUtil {
     );
   }
 
-  static void checkForAddExerciseButton(
+  static void checkForAddExerciseWidget(
     WidgetTester tester,
     Widget mockApp,
   ) async {
     await tester.pumpWidget(mockApp);
 
-    Key buttonKey = Key('addExercisesButton');
-    Finder button = find.byKey(buttonKey);
+    Key widgetKey = Key('addWorkoutExerciseWidget');
+    Finder widget = find.byKey(widgetKey);
 
-    expect(button, findsOneWidget);
+    expect(widget, findsOneWidget);
   }
 }

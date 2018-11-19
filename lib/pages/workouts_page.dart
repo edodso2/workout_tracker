@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
+import '../widgets/exercise_list_modal.dart';
+import '../widgets/add_workout_exercise.dart';
+import '../models/workout.dart';
 import '../scoped_models/main.dart';
 import '../models/workout_exercise.dart';
 import '../widgets/workout_exercise_card.dart';
@@ -43,7 +46,8 @@ class WorkoutsPage extends StatelessWidget {
             child: index >= 0
                 ? buildWorkoutList(
                     context,
-                    model.workouts[index].workoutExercises,
+                    model.workouts[index],
+                    index,
                   )
                 : buildNoWorkouts(context),
           );
@@ -55,25 +59,24 @@ class WorkoutsPage extends StatelessWidget {
   /// Workout found scenario widgets
   Widget buildWorkoutList(
     BuildContext context,
-    List<WorkoutExercise> exercises,
+    Workout workout,
+    int index,
   ) {
     return Column(
       children: <Widget>[
         Expanded(
-          child: exercises.length > 0
-              ? buildExerciseList(exercises)
+          child: workout.workoutExercises.length > 0
+              ? buildExerciseList(workout.workoutExercises)
               : Text(
                   'No exercises.',
                   key: Key('noExercisesMessage'),
                 ),
         ),
-        RaisedButton(
-          key: Key('addExercisesButton'),
-          color: Theme.of(context).accentColor,
-          textColor: Colors.white,
-          child: Text('Add Excercise'),
-          onPressed: () => {},
-        )
+        AddWorkoutExercise(
+          index,
+          ExerciseListModal.showListModal,
+          key: Key('addWorkoutExerciseWidget'),
+        ),
       ],
     );
   }
@@ -102,9 +105,11 @@ class WorkoutsPage extends StatelessWidget {
           color: Theme.of(context).accentColor,
           textColor: Colors.white,
           child: Text('Create Workout'),
-          onPressed: () => {
-                // create a new workout and go to add exercises page.
-              },
+          onPressed: () {
+            // create a new workout. This should result in a re-render
+            // of this page and the page state should change. Widget test should
+            // be added for this when feature is added.
+          },
         ),
       ],
     );
