@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 /// how the default flutter slider/checkbox works but
 /// it would not update the UI via setState call when
 /// user bottom sheet. Not sure if this is an issue
-/// or intended but for now this widget will be stateful
+/// or intended but for now this widget will be stateful.
+/// UPDATE:
+/// Below link seems to address this issue.
+/// https://github.com/flutter/flutter/issues/2115
 class Counter extends StatefulWidget {
   final Function onChanged;
   final int increment;
