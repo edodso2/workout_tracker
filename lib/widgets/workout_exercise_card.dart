@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../models/workout_set.dart';
 import '../models/workout_exercise.dart';
 
 class WorkoutExerciseCard extends StatelessWidget {
@@ -25,31 +26,58 @@ class WorkoutExerciseCard extends StatelessWidget {
               height: 30.0,
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                children: <Widget>[
-                  Chip(
-                    label: Text('5 x 225'),
-                    backgroundColor: Theme.of(context).accentColor,
-                    labelStyle: TextStyle(
-                      color: Colors.white,
-                      fontSize: 12.0,
-                    ),
-                  ),
-                  SizedBox(width: 8.0),
-                  InkWell(
-                    child: Icon(
-                      Icons.add_circle,
-                      color: Theme.of(context).accentColor,
-                      size: 30.0,
-                    ),
-                    borderRadius: BorderRadius.circular(50.0),
-                    onTap: () => {},
-                  ),
-                ],
+                children: _buildSetsList(context, exercise.workoutSets),
               ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  List<Widget> _buildSetsList(
+    BuildContext context,
+    List<WorkoutSet> workoutSets,
+  ) {
+    List<Widget> setsList = [];
+
+    // create the array of chips to display the workout sets
+    for (var i = 0; i < workoutSets.length; i++) {
+      final WorkoutSet workoutSet = workoutSets[i];
+
+      setsList.add(GestureDetector(
+        key: Key('workoutSet$i'),
+        onTap: () => {},
+        child: Chip(
+          label: Text('${workoutSet.reps} x ${workoutSet.weight}'),
+          backgroundColor: Theme.of(context).accentColor,
+          labelStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 12.0,
+          ),
+        ),
+      ));
+    }
+
+    // add a spacer only if there are going to be chips before the add icon
+    if (setsList.length > 0) {
+      setsList.add(SizedBox(width: 8.0));
+    }
+
+    // add the plus icon for adding a new set
+    setsList.add(
+      InkWell(
+        key: Key('addWorkoutSetBtn'),
+        child: Icon(
+          Icons.add_circle,
+          color: Theme.of(context).accentColor,
+          size: 30.0,
+        ),
+        borderRadius: BorderRadius.circular(50.0),
+        onTap: () => {},
+      ),
+    );
+
+    return setsList;
   }
 }

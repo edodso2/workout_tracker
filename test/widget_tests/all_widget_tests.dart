@@ -3,6 +3,7 @@ import './workouts_page_test.dart' as workoutsPage;
 import './exercise_list_modal_test.dart' as listModal;
 import './add_workout_exercise_test.dart' as addWorkoutExercise;
 import './workout_calendar_test.dart' as workoutCalendar;
+import './workout_exercise_card_test.dart' as workoutExerciseCard;
 
 main() {
   addExercisePage.main();
@@ -10,4 +11,5 @@ main() {
   listModal.main();
   addWorkoutExercise.main();
   workoutCalendar.main();
+  workoutExerciseCard.main();
 }

@@ -8,6 +8,11 @@ import 'package:workout_tracker/models/workout_exercise.dart';
 import 'package:workout_tracker/pages/workouts_page.dart';
 import 'package:workout_tracker/scoped_models/main.dart';
 
+/// TODO: the grouping in this file is ok but makes it a bit hard to read.
+/// I prefer the approach I used for the workout_exercise_card_test file
+/// where a utility function and global variables are used to modularize
+/// the test as opposed to the 'group' function. Should refactor in future.
+
 /// This file will contain UI tests for the add exercise widget page
 /// and will mock the MainModel. The MainModel is tested under the
 /// model_tests folder.
