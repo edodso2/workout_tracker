@@ -4,7 +4,6 @@ import 'package:workout_tracker/scoped_models/main.dart';
 
 import '../models/workout_exercise.dart';
 import '../models/exercise.dart';
-import '../widgets/exercise_list_modal.dart';
 
 /// The purpose of this widget is to encapsulate all of the neceassary logic
 /// needed to add a workout exercise to a workout. To do this the widget
@@ -41,7 +40,7 @@ class AddWorkoutExercise extends StatelessWidget {
             ).then((Exercise exercise) {
               model.addWorkoutExercise(
                 index,
-                WorkoutExercise(name: exercise.name),
+                WorkoutExercise(name: exercise.name, workoutSets: []),
               );
             });
           },

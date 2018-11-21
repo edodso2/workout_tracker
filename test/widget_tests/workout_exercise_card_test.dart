@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 import 'package:workout_tracker/models/workout_exercise.dart';
 import 'package:workout_tracker/models/workout_set.dart';
@@ -39,7 +40,7 @@ void main() {
       await TestUtils.runMockApp(tester, workoutExerciseNoSets);
 
       Finder workoutSet0Widget = find.byKey(Key('workoutSet0'));
-      Finder addWorkoutSetBtn = find.byKey(Key('addWorkoutSetBtn'));
+      Finder addWorkoutSetBtn = find.byKey(Key('addWorkoutSet'));
 
       expect(workoutSet0Widget, findsNothing);
       expect(addWorkoutSetBtn, findsOneWidget);
@@ -52,7 +53,7 @@ void main() {
       await TestUtils.runMockApp(tester, workoutExerciseWithSets);
 
       Finder workoutSet0Widget = find.byKey(Key('workoutSet0'));
-      Finder addWorkoutSetBtn = find.byKey(Key('addWorkoutSetBtn'));
+      Finder addWorkoutSetBtn = find.byKey(Key('addWorkoutSet'));
 
       expect(workoutSet0Widget, findsOneWidget);
       expect(addWorkoutSetBtn, findsOneWidget);
@@ -74,7 +75,11 @@ class TestUtils {
     WidgetTester tester,
     WorkoutExercise workoutExercise,
   ) async {
-    Widget mockApp = MaterialApp(home: WorkoutExerciseCard(workoutExercise));
+    MainModel model = MockMainModel();
+    Widget mockApp = ScopedModel<MainModel>(
+      model: model,
+      child: MaterialApp(home: WorkoutExerciseCard(0, 0, workoutExercise)),
+    );
 
     await tester.pumpWidget(mockApp);
   }

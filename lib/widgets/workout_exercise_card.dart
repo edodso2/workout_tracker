@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/add_workout_set.dart';
 import '../models/workout_set.dart';
 import '../models/workout_exercise.dart';
 
 class WorkoutExerciseCard extends StatelessWidget {
+  final int workoutIndex;
+  final int exerciseIndex;
   final WorkoutExercise exercise;
 
-  WorkoutExerciseCard(this.exercise, {Key key}) : super(key: key);
+  WorkoutExerciseCard(
+    this.workoutIndex,
+    this.exerciseIndex,
+    this.exercise, {
+    Key key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -65,18 +73,11 @@ class WorkoutExerciseCard extends StatelessWidget {
     }
 
     // add the plus icon for adding a new set
-    setsList.add(
-      InkWell(
-        key: Key('addWorkoutSetBtn'),
-        child: Icon(
-          Icons.add_circle,
-          color: Theme.of(context).accentColor,
-          size: 30.0,
-        ),
-        borderRadius: BorderRadius.circular(50.0),
-        onTap: () => {},
-      ),
-    );
+    setsList.add(AddWorkoutSet(
+      workoutIndex,
+      exerciseIndex,
+      key: Key('addWorkoutSet'),
+    ));
 
     return setsList;
   }

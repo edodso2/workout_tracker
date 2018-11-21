@@ -66,7 +66,7 @@ class WorkoutsPage extends StatelessWidget {
       children: <Widget>[
         Expanded(
           child: workout.workoutExercises.length > 0
-              ? buildExerciseList(workout.workoutExercises)
+              ? buildExerciseList(index, workout.workoutExercises)
               : Text(
                   'No exercises.',
                   key: Key('noExercisesMessage'),
@@ -81,10 +81,10 @@ class WorkoutsPage extends StatelessWidget {
     );
   }
 
-  Widget buildExerciseList(List<WorkoutExercise> exercises) {
+  Widget buildExerciseList(int workoutIndex, List<WorkoutExercise> exercises) {
     return ListView.builder(
       itemBuilder: (BuildContext context, int index) {
-        return WorkoutExerciseCard(exercises[index]);
+        return WorkoutExerciseCard(workoutIndex, index, exercises[index]);
       },
       itemCount: exercises.length,
     );

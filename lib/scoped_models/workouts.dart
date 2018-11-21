@@ -1,5 +1,6 @@
 import 'package:scoped_model/scoped_model.dart';
 
+import '../models/workout_set.dart';
 import '../models/workout.dart';
 import '../models/workout_exercise.dart';
 
@@ -40,6 +41,19 @@ mixin WorkoutsModel on Model {
     WorkoutExercise workoutExercise,
   ) {
     _workouts[index].workoutExercises.add(workoutExercise);
+    notifyListeners();
+  }
+
+  /// Add an exercise set to the workout at the specified index.
+  void addWorkoutSet(
+    int workoutIndex,
+    int workoutExerciseIndex,
+    WorkoutSet workoutSet,
+  ) {
+    _workouts[workoutIndex]
+        .workoutExercises[workoutExerciseIndex]
+        .workoutSets
+        .add(workoutSet);
     notifyListeners();
   }
 }

@@ -1,0 +1,80 @@
+import 'package:flutter/material.dart';
+
+/// I tried to make this widget stateless similar to
+/// how the default flutter slider/checkbox works but
+/// it would not update the UI via setState call when
+/// user bottom sheet. Not sure if this is an issue
+/// or intended but for now this widget will be stateful
+class Counter extends StatefulWidget {
+  final Function onChanged;
+  final int increment;
+  final int startingValue;
+
+  Counter({
+    this.startingValue = 0,
+    this.onChanged,
+    this.increment = 1,
+  });
+
+  @override
+  State<StatefulWidget> createState() {
+    return _CounterState();
+  }
+}
+
+class _CounterState extends State<Counter> {
+  int value;
+
+  void initState() { 
+    super.initState();
+    value = widget.startingValue;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        IconButton(
+          icon: Icon(
+            Icons.remove_circle_outline,
+            color: Theme.of(context).accentColor,
+          ),
+          onPressed: _subtract,
+        ),
+        Text(
+          value.toString(),
+          style: TextStyle(
+            fontSize: 18.0,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        IconButton(
+          icon: Icon(
+            Icons.add_circle_outline,
+            color: Theme.of(context).accentColor,
+          ),
+          onPressed: _add,
+        ),
+      ],
+    );
+  }
+
+  void _subtract() {
+    // extra logic for preventing negative values
+    int newValue = value - widget.increment;
+    if (newValue < 0) {
+      newValue = 0;
+    }
+    setState(() {
+      value = newValue;
+      widget.onChanged(value);
+    });
+  }
+
+  void _add() {
+    setState(() {
+      value = value + widget.increment;
+      widget.onChanged(value);
+    });
+  }
+}
