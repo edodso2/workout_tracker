@@ -53,10 +53,8 @@ class _AddWorkoutSetState extends State<AddWorkoutSet> {
               model.addWorkoutSet(
                 widget.workoutIndex,
                 widget.exerciseIndex,
-                WorkoutSet(
-                  reps: reps,
-                  weight: weight,
-                ),
+                reps: reps,
+                weight: weight,
               );
             }
           });
@@ -91,6 +89,7 @@ class _AddWorkoutSetState extends State<AddWorkoutSet> {
               },
             ),
             RaisedButton(
+              key: Key('addSetButton'),
               child: Text('Add Set'),
               onPressed: () => Navigator.pop(context, true),
             )

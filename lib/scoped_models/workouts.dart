@@ -47,9 +47,14 @@ mixin WorkoutsModel on Model {
   /// Add an exercise set to the workout at the specified index.
   void addWorkoutSet(
     int workoutIndex,
-    int workoutExerciseIndex,
-    WorkoutSet workoutSet,
-  ) {
+    int workoutExerciseIndex, {
+    reps,
+    weight,
+  }) {
+    final WorkoutSet workoutSet = WorkoutSet(
+      reps: reps,
+      weight: weight,
+    );
     _workouts[workoutIndex]
         .workoutExercises[workoutExerciseIndex]
         .workoutSets
