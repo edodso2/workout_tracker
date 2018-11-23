@@ -5,7 +5,6 @@ import 'package:mockito/mockito.dart';
 
 import 'package:workout_tracker/models/workout.dart';
 import 'package:workout_tracker/models/workout_exercise.dart';
-import 'package:workout_tracker/models/workout_set.dart';
 import 'package:workout_tracker/scoped_models/main.dart';
 import 'package:workout_tracker/widgets/add_workout_set.dart';
 
