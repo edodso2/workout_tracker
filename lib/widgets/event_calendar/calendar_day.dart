@@ -13,17 +13,20 @@ class CalendarDay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String day = date.day.toString();
+
     return Container(
       padding: EdgeInsets.all(2.0),
       child: Container(
         child: InkWell(
           borderRadius: BorderRadius.circular(50.0),
           child: Column(
+            key: Key('day$day'),
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Text(
-                date.day.toString(),
+                day,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

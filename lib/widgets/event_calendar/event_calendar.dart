@@ -6,10 +6,12 @@ import './calendar_day.dart';
 class EventCalendar extends StatefulWidget {
   final ValueChanged<DateTime> onDateSelected;
   final DateTime date;
+  final List<DateTime> markedDates;
 
   EventCalendar({
     this.date,
     this.onDateSelected,
+    this.markedDates,
   });
 
   @override
@@ -18,8 +20,6 @@ class EventCalendar extends StatefulWidget {
 
 class _EventCalendarState extends State<EventCalendar> {
   DateTime currentDate;
-
-  List<DateTime> markedDates = [DateTime(2018, 11, 4), DateTime(2018, 11, 10)];
 
   @override
   void initState() {
@@ -92,7 +92,7 @@ class _EventCalendarState extends State<EventCalendar> {
         if (date.month == selectedDate.month) {
           return CalendarDay(
             date,
-            isMarked: markedDates.contains(date),
+            isMarked: widget.markedDates.contains(date),
             onDateSelected: () {
               setState(() {
                 widget.onDateSelected(date);
