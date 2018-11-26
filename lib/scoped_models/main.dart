@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:workout_tracker/services/workout_service.dart';
 
 import '../services/exercise_service.dart';
 import '../models/exercise.dart';
@@ -8,6 +9,7 @@ import './workouts.dart';
 // TODO: can the exercise model code be moved to seperate Class or file?
 class MainModel extends Model with WorkoutsModel {
   final ExerciseService exerciseService;
+  final WorkoutService workoutService;
 
   List<Exercise> _exercises = [];
 
@@ -20,7 +22,7 @@ class MainModel extends Model with WorkoutsModel {
     return List.from(_exercises);
   }
 
-  MainModel({@required this.exerciseService});
+  MainModel({@required this.exerciseService, @required this.workoutService});
 
   @override
   void addListener(listener) {

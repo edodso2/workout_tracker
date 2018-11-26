@@ -5,14 +5,17 @@ import './pages/workouts_page.dart';
 import './router_param_parser.dart';
 import './scoped_models/main.dart';
 import './services/exercise_service.dart';
+import './services/workout_service.dart';
 import './pages/home_page.dart';
 import './pages/add_exercise_page.dart';
 
 class App extends StatelessWidget {
   final ExerciseService exerciseService;
+  final WorkoutService workoutService;
 
   App({
     @required this.exerciseService,
+    @required this.workoutService,
   });
 
   @override
@@ -33,6 +36,7 @@ class App extends StatelessWidget {
     return ScopedModel<MainModel>(
       model: MainModel(
         exerciseService: exerciseService,
+        workoutService: workoutService,
       ),
       child: app,
     );
