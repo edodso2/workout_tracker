@@ -49,7 +49,7 @@ class _AddExercisePageState extends State<AddExercisePage> {
             child: Column(
               children: <Widget>[
                 TextFormField(
-                  key: new Key('name'),
+                  key: Key('name'),
                   decoration: InputDecoration(
                     labelText: 'Name',
                   ),
