@@ -5,18 +5,23 @@ import 'package:mockito/mockito.dart';
 
 import 'package:workout_tracker/models/exercise.dart';
 import 'package:workout_tracker/models/workout_exercise.dart';
-import 'package:workout_tracker/scoped_models/main.dart';
+import 'package:workout_tracker/scoped_models/exercises.dart';
+import 'package:workout_tracker/scoped_models/workouts.dart';
 import 'package:workout_tracker/widgets/add_workout_exercise.dart';
 
 void main() {
   testWidgets(
     'Should call addWorkoutExercise when modal returns',
     (WidgetTester tester) async {
-      MainModel model = MockMainModel();
-      Widget mockApp = ScopedModel<MainModel>(
-        model: model,
+      WorkoutsModel workoutsModel = MockWorkoutsModel();
+      ExercisesModel exercisesModel = MockExercisesModel();
+      Widget mockApp = ScopedModel<WorkoutsModel>(
+        model: workoutsModel,
         child: MaterialApp(
-          home: AddWorkoutExercise(1, MockExerciseListModal.showListModal),
+          home: ScopedModel<ExercisesModel>(
+            model: exercisesModel,
+            child: AddWorkoutExercise(1, MockExerciseListModal.showListModal),
+          ),
         ),
       );
       WorkoutExercise workoutExercise = WorkoutExercise(name: 'Deadlift');
@@ -26,12 +31,14 @@ void main() {
       Finder button = find.byKey(Key('addExercisesButton'));
       await tester.tap(button);
 
-      verify(model.addWorkoutExercise(1, workoutExercise)).called(1);
+      verify(workoutsModel.addWorkoutExercise(1, workoutExercise)).called(1);
     },
   );
 }
 
-class MockMainModel extends Mock implements MainModel {}
+class MockWorkoutsModel extends Mock implements WorkoutsModel {}
+
+class MockExercisesModel extends Mock implements ExercisesModel {}
 
 class MockExerciseListModal {
   static Future<Exercise> showListModal(

@@ -5,15 +5,15 @@ import 'package:mockito/mockito.dart';
 
 import 'package:workout_tracker/models/workout.dart';
 import 'package:workout_tracker/models/workout_exercise.dart';
-import 'package:workout_tracker/scoped_models/main.dart';
+import 'package:workout_tracker/scoped_models/workouts.dart';
 import 'package:workout_tracker/widgets/add_workout_set.dart';
 
 void main() {
   testWidgets(
     'Should add workout set with default counter values',
     (WidgetTester tester) async {
-      MainModel model = MockMainModel();
-      Widget mockApp = ScopedModel<MainModel>(
+      WorkoutsModel model = MockMainModel();
+      Widget mockApp = ScopedModel<WorkoutsModel>(
         model: model,
         child: MaterialApp(
           home: Scaffold(body: AddWorkoutSet(0, 0)),
@@ -58,4 +58,4 @@ void main() {
   );
 }
 
-class MockMainModel extends Mock implements MainModel {}
+class MockMainModel extends Mock implements WorkoutsModel {}

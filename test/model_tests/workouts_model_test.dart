@@ -4,8 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:workout_tracker/models/workout.dart';
 import 'package:workout_tracker/models/workout_exercise.dart';
 import 'package:workout_tracker/models/workout_set.dart';
-import 'package:workout_tracker/scoped_models/main.dart';
-import 'package:workout_tracker/services/exercise_service.dart';
+import 'package:workout_tracker/scoped_models/workouts.dart';
 import 'package:workout_tracker/services/workout_service.dart';
 
 /// This test will test all the functions of the model/state management.
@@ -18,18 +17,12 @@ import 'package:workout_tracker/services/workout_service.dart';
 /// logic that is already implemented in the model...
 main() {
   group('WorkoutModel', () {
-    MainModel model;
-    ExerciseService exerciseService;
+    WorkoutsModel model;
     DateTime date;
 
     setUp(() {
       date = DateTime(2018, 11, 10); // nov 10, 2018
-      exerciseService = MockExerciseService();
-      
-      when(exerciseService.loadExercises()).thenAnswer((_) => Future.value([]));
-
-      model = MainModel(
-        exerciseService: exerciseService,
+      model = WorkoutsModel(
         workoutService: MockWorkoutService(),
       );
     });
@@ -82,5 +75,4 @@ main() {
   });
 }
 
-class MockExerciseService extends Mock implements ExerciseService {}
 class MockWorkoutService extends Mock implements WorkoutService {}

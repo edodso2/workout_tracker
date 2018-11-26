@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import './counter.dart';
-import '../models/workout_set.dart';
-import '../scoped_models/main.dart';
+import '../scoped_models/workouts.dart';
 
 class AddWorkoutSet extends StatefulWidget {
   final int workoutIndex;
@@ -34,10 +33,10 @@ class _AddWorkoutSetState extends State<AddWorkoutSet> {
 
   @override
   Widget build(BuildContext context) {
-    return ScopedModelDescendant<MainModel>(builder: (
+    return ScopedModelDescendant<WorkoutsModel>(builder: (
       BuildContext context,
       Widget child,
-      MainModel model,
+      WorkoutsModel model,
     ) {
       return InkWell(
         key: Key('addWorkoutSetBtn'),

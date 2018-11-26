@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../scoped_models/main.dart';
+import '../scoped_models/exercises.dart';
 
 class Exercises extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ScopedModelDescendant<MainModel>(builder: (
+    return ScopedModelDescendant<ExercisesModel>(builder: (
       BuildContext context,
       Widget child,
-      MainModel model,
+      ExercisesModel model,
     ) {
       return Container(
         margin: EdgeInsets.only(bottom: 30.0),

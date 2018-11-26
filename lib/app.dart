@@ -3,12 +3,12 @@ import 'package:scoped_model/scoped_model.dart';
 
 import './pages/workouts_page.dart';
 import './router_param_parser.dart';
-import './scoped_models/main.dart';
+import './scoped_models/workouts.dart';
 import './pages/home_page.dart';
 import './pages/add_exercise_page.dart';
 
 class App extends StatelessWidget {
-  final MainModel model;
+  final WorkoutsModel model;
 
   App({
     @required this.model,
@@ -29,7 +29,7 @@ class App extends StatelessWidget {
       onGenerateRoute: _parseRouteParams,
     );
 
-    return ScopedModel<MainModel>(
+    return ScopedModel<WorkoutsModel>(
       model: model,
       child: app,
     );

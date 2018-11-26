@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:path_provider/path_provider.dart';
 
-import '../scoped_models/main.dart';
+import '../services/exercise_service.dart';
+import '../services/exercise_service_flutter.dart';
+import '../scoped_models/workouts.dart';
+import '../scoped_models/exercises.dart';
 import '../widgets/workout_calendar.dart';
 import '../widgets/exercises.dart';
 
@@ -12,11 +16,29 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
-  final _widgetOptions = [
-    Center(child: Text('No workout today.')),
-    WorkoutCalendar(),
-    Exercises(),
-  ];
+  List<Widget> _widgetOptions;
+
+  _HomePageState() {
+    // Create the exercises model
+    Function getDir = getApplicationDocumentsDirectory;
+    ExerciseService exerciseService = ExerciseServiceFlutter(getDir);
+    ExercisesModel exercisesModel = ExercisesModel(
+      exerciseService: exerciseService,
+    );
+
+    // Set the tabs/options
+    _widgetOptions = [
+      Center(child: Text('Welcome')),
+      ScopedModel<ExercisesModel>(
+        model: exercisesModel,
+        child: WorkoutCalendar(),
+      ),
+      ScopedModel<ExercisesModel>(
+        model: exercisesModel,
+        child: Exercises(),
+      ),
+    ];
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -69,9 +91,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final model = ScopedModel.of<MainModel>(context);
+    final workoutsModel = ScopedModel.of<WorkoutsModel>(context);
 
-    if (model.loading) {
+    if (workoutsModel.loading) {
       return loadingView();
     } else {
       return homeView();

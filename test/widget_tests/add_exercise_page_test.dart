@@ -5,15 +5,15 @@ import 'package:mockito/mockito.dart';
 
 import 'package:workout_tracker/models/exercise.dart';
 import 'package:workout_tracker/pages/add_exercise_page.dart';
-import 'package:workout_tracker/scoped_models/main.dart';
+import 'package:workout_tracker/scoped_models/exercises.dart';
 
 /// This file will contain UI tests for the add exercise widget page
 /// and will mock the MainModel. The MainModel is tested under the
 /// model_tests folder.
 void main() {
   testWidgets('Adding exercise smoke test', (WidgetTester tester) async {
-    MainModel model = MockMainModel();
-    Widget mockApp = ScopedModel<MainModel>(
+    ExercisesModel model = MockMainModel();
+    Widget mockApp = ScopedModel<ExercisesModel>(
       model: model,
       child: MaterialApp(home: AddExercisePage()),
     );
@@ -29,4 +29,4 @@ void main() {
   });
 }
 
-class MockMainModel extends Mock implements MainModel {}
+class MockMainModel extends Mock implements ExercisesModel {}

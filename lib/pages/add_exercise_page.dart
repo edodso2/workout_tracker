@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../models/exercise.dart';
-import '../scoped_models/main.dart';
+import '../scoped_models/exercises.dart';
 
 class AddExercisePage extends StatefulWidget {
   @override
@@ -37,10 +37,10 @@ class _AddExercisePageState extends State<AddExercisePage> {
       appBar: AppBar(
         title: Text('Add Exercise'),
       ),
-      body: ScopedModelDescendant<MainModel>(builder: (
+      body: ScopedModelDescendant<ExercisesModel>(builder: (
         BuildContext context,
         Widget child,
-        MainModel model,
+        ExercisesModel model,
       ) {
         return Form(
           key: _formKey,

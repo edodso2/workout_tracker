@@ -1,28 +1,25 @@
 import 'package:test_api/test_api.dart';
 import 'package:mockito/mockito.dart';
-import 'package:workout_tracker/models/exercise.dart';
-import 'package:workout_tracker/scoped_models/main.dart';
-import 'package:workout_tracker/services/exercise_service.dart';
-import 'package:workout_tracker/services/workout_service.dart';
 
-/// This test will test all the functions of the model/state management.
+import 'package:workout_tracker/models/exercise.dart';
+import 'package:workout_tracker/scoped_models/exercises.dart';
+import 'package:workout_tracker/services/exercise_service.dart';
+
+/// This test will test all the functions of the exercise model.
 /// The UI tests can then assume that the model functions all work and be
 /// much more lightweight.
 main() {
-  group('MainModel', () {
-    MainModel model;
+  group('ExerciseModel', () {
+    ExercisesModel model;
     ExerciseService exerciseService;
-    WorkoutService workoutService;
 
     setUp(() {
       exerciseService = MockExerciseService();
-      workoutService = MockWorkoutService();
 
       when(exerciseService.loadExercises()).thenAnswer((_) => Future.value([]));
 
-      model = MainModel(
+      model = ExercisesModel(
         exerciseService: exerciseService,
-        workoutService: workoutService,
       );
     });
 
@@ -73,5 +70,3 @@ main() {
 }
 
 class MockExerciseService extends Mock implements ExerciseService {}
-
-class MockWorkoutService extends Mock implements WorkoutService {}

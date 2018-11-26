@@ -7,7 +7,7 @@ import 'package:mockito/mockito.dart';
 import 'package:workout_tracker/models/workout.dart';
 import 'package:workout_tracker/models/workout_exercise.dart';
 import 'package:workout_tracker/router_param_parser.dart';
-import 'package:workout_tracker/scoped_models/main.dart';
+import 'package:workout_tracker/scoped_models/workouts.dart';
 import 'package:workout_tracker/widgets/workout_calendar.dart';
 
 /// This file will contain UI tests for the add exercise widget page
@@ -16,7 +16,7 @@ import 'package:workout_tracker/widgets/workout_calendar.dart';
 void main() {
   NavigatorObserver mockObserver;
   DateTime date;
-  MainModel model;
+  WorkoutsModel model;
   List<Workout> workouts;
   List<WorkoutExercise> workoutExercises;
 
@@ -43,7 +43,7 @@ void main() {
     /// the right route name and params are passed to the navigator. This assumes
     /// that the RouterparamParser is working.
     ParsedRoute parsedRoute;
-    Widget mockApp = ScopedModel<MainModel>(
+    Widget mockApp = ScopedModel<WorkoutsModel>(
       model: model,
       child: MaterialApp(
         home: Scaffold(
@@ -82,7 +82,7 @@ void main() {
   /// this test is actually testin the calendar_day widget and a new test
   /// file should be created for that widget.
   testWidgets('Should show marked dates', (WidgetTester tester) async {
-    Widget mockApp = ScopedModel<MainModel>(
+    Widget mockApp = ScopedModel<WorkoutsModel>(
       model: model,
       child: MaterialApp(
         home: Scaffold(
@@ -109,7 +109,7 @@ void main() {
   });
 }
 
-class MockMainModel extends Mock implements MainModel {}
+class MockMainModel extends Mock implements WorkoutsModel {}
 
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 

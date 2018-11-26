@@ -1,11 +1,15 @@
+import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
+import '../services/workout_service.dart';
 import '../models/workout_set.dart';
 import '../models/workout.dart';
 import '../models/workout_exercise.dart';
 
-mixin WorkoutsModel on Model {
+class WorkoutsModel extends Model {
+  WorkoutService workoutService;
   List<Workout> _workouts = [];
+  bool loading = false;
 
   List<Workout> get workouts {
     /// list.from creates a new instance so that
@@ -13,6 +17,8 @@ mixin WorkoutsModel on Model {
     /// memory by Widgets.
     return List.from(_workouts);
   }
+
+  WorkoutsModel({@required this.workoutService});
 
   /// Returns the index of the workout on the specified date. -1 returned
   /// if workout does not exist on that date.

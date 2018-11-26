@@ -6,22 +6,19 @@ import 'package:mockito/mockito.dart';
 import 'package:workout_tracker/models/workout.dart';
 import 'package:workout_tracker/models/workout_exercise.dart';
 import 'package:workout_tracker/pages/workouts_page.dart';
-import 'package:workout_tracker/scoped_models/main.dart';
+import 'package:workout_tracker/scoped_models/exercises.dart';
+import 'package:workout_tracker/scoped_models/workouts.dart';
 
 /// TODO: the grouping in this file is ok but makes it a bit hard to read.
 /// I prefer the approach I used for the workout_exercise_card_test file
 /// where a utility function and global variables are used to modularize
 /// the test as opposed to the 'group' function. Should refactor in future.
-
-/// This file will contain UI tests for the add exercise widget page
-/// and will mock the MainModel. The MainModel is tested under the
-/// model_tests folder.
 void main() {
   /// All of the tests in this file can use the same model since
   /// it is mocked. Can also use the same date for all the tests
   /// and simply return different values from the mocked model
   /// using Mockito.
-  MainModel model = MockMainModel();
+  WorkoutsModel model = MockWorkoutsModel();
   final year = 2018;
   final month = 11;
   final day = 5;
@@ -140,14 +137,19 @@ void main() {
   });
 }
 
-class MockMainModel extends Mock implements MainModel {}
+class MockWorkoutsModel extends Mock implements WorkoutsModel {}
+
+class MockExercisesModel extends Mock implements ExercisesModel {}
 
 class TestUtil {
   static Widget createMockApp(model, year, month, day) {
-    return ScopedModel<MainModel>(
+    return ScopedModel<WorkoutsModel>(
       model: model,
       child: MaterialApp(
-        home: WorkoutsPage(year: year, month: month, day: day),
+        home: ScopedModel<ExercisesModel>(
+          model: MockExercisesModel(), // needed for the add exercises widget
+          child: WorkoutsPage(year: year, month: month, day: day),
+        ),
       ),
     );
   }

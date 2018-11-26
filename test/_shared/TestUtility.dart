@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import 'package:workout_tracker/scoped_models/main.dart';
+import 'package:workout_tracker/scoped_models/workouts.dart';
 import 'package:workout_tracker/models/workout.dart';
 import 'package:workout_tracker/models/workout_exercise.dart';
 import 'package:workout_tracker/models/workout_set.dart';
@@ -11,10 +11,10 @@ import 'package:workout_tracker/models/workout_set.dart';
 /// Contains various utility functions that can be used
 /// by all the tests in order to simplify the code in tests.
 
-class MockMainModel extends Mock implements MainModel {}
+class MockMainModel extends Mock implements WorkoutsModel {}
 
 class TestUtility {
-  final MainModel model = MockMainModel();
+  final WorkoutsModel model = MockMainModel();
 
   TestUtility();
 
@@ -22,7 +22,7 @@ class TestUtility {
     WidgetTester tester,
     Widget homeWidget,
   ) async {
-    Widget mockApp = ScopedModel<MainModel>(
+    Widget mockApp = ScopedModel<WorkoutsModel>(
       model: model,
       child: MaterialApp(home: homeWidget),
     );

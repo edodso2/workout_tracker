@@ -4,7 +4,7 @@ import 'package:scoped_model/scoped_model.dart';
 import '../widgets/exercise_list_modal.dart';
 import '../widgets/add_workout_exercise.dart';
 import '../models/workout.dart';
-import '../scoped_models/main.dart';
+import '../scoped_models/workouts.dart';
 import '../models/workout_exercise.dart';
 import '../widgets/workout_exercise_card.dart';
 
@@ -32,11 +32,11 @@ class WorkoutsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Workouts'),
       ),
-      body: ScopedModelDescendant<MainModel>(
+      body: ScopedModelDescendant<WorkoutsModel>(
         builder: (
           BuildContext context,
           Widget child,
-          MainModel model,
+          WorkoutsModel model,
         ) {
           final date = DateTime(year, month, day);
           int index = model.getWorkoutOnDate(date);
@@ -91,7 +91,7 @@ class WorkoutsPage extends StatelessWidget {
   }
 
   /// Workout not found scenario widgets
-  Widget buildNoWorkouts(BuildContext context, MainModel model, DateTime date) {
+  Widget buildNoWorkouts(BuildContext context, WorkoutsModel model, DateTime date) {
     return Column(
       children: <Widget>[
         Expanded(

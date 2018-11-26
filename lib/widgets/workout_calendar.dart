@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../models/workout.dart';
-import '../scoped_models/main.dart';
+import '../scoped_models/workouts.dart';
 import '../widgets/event_calendar/event_calendar.dart';
 
 class WorkoutCalendar extends StatefulWidget {
@@ -13,11 +13,11 @@ class WorkoutCalendar extends StatefulWidget {
 class _WorkoutCalendar extends State<WorkoutCalendar> {
   @override
   Widget build(BuildContext context) {
-    return ScopedModelDescendant<MainModel>(
+    return ScopedModelDescendant<WorkoutsModel>(
       builder: (
         BuildContext context,
         Widget child,
-        MainModel model,
+        WorkoutsModel model,
       ) {
         List<DateTime> markedDates = model.workouts.map((Workout workout) {
           return workout.date;
