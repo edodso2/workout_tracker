@@ -14,12 +14,9 @@ import 'package:workout_tracker/models/workout_set.dart';
 class MockMainModel extends Mock implements MainModel {}
 
 class TestUtility {
-  final Widget homeWidget;
   final MainModel model = MockMainModel();
 
-  TestUtility({
-    this.homeWidget,
-  });
+  TestUtility();
 
   runMockApp(
     WidgetTester tester,

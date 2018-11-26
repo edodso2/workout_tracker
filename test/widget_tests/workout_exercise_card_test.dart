@@ -1,32 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
-import 'package:scoped_model/scoped_model.dart';
 
 import 'package:workout_tracker/models/workout_exercise.dart';
-import 'package:workout_tracker/models/workout_set.dart';
-import 'package:workout_tracker/scoped_models/main.dart';
 import 'package:workout_tracker/widgets/workout_exercise_card.dart';
 
-void main() {
-  WorkoutSet workoutSet1 = WorkoutSet(reps: 10, weight: 135);
-  List<WorkoutSet> workoutSets = [
-    workoutSet1,
-  ];
+import '../_shared/TestUtility.dart';
 
-  WorkoutExercise workoutExerciseNoSets = WorkoutExercise(
-    name: 'Deadlift',
-    workoutSets: [],
-  );
-  WorkoutExercise workoutExerciseWithSets = WorkoutExercise(
-    name: 'Deadlift',
-    workoutSets: workoutSets,
-  );
+void main() {
+
+  // helper function for running the test app
+  runMockApp(
+    WidgetTester tester, {
+    bool withWorkoutSets = false,
+  }) async {
+    WorkoutExercise workoutExercise = TestUtility.createWorkoutExercise(
+      hasSets: withWorkoutSets,
+    );
+    WorkoutExerciseCard workoutExerciseCard = WorkoutExerciseCard(
+      0,
+      0,
+      workoutExercise,
+    );
+
+    TestUtility testUtility = TestUtility();
+
+    await testUtility.runMockApp(tester, workoutExerciseCard);
+  }
 
   testWidgets(
     'Should display workout name',
     (WidgetTester tester) async {
-      await TestUtils.runMockApp(tester, workoutExerciseNoSets);
+      await runMockApp(tester, withWorkoutSets: false);
 
       Finder title = find.text('Deadlift');
 
@@ -37,7 +41,7 @@ void main() {
   testWidgets(
     'Should only display add button if no sets/reps for workout',
     (WidgetTester tester) async {
-      await TestUtils.runMockApp(tester, workoutExerciseNoSets);
+      await runMockApp(tester, withWorkoutSets: false);
 
       Finder workoutSet0Widget = find.byKey(Key('workoutSet0'));
       Finder addWorkoutSetBtn = find.byKey(Key('addWorkoutSet'));
@@ -50,7 +54,7 @@ void main() {
   testWidgets(
     'Should display workout sets and reps',
     (WidgetTester tester) async {
-      await TestUtils.runMockApp(tester, workoutExerciseWithSets);
+      await runMockApp(tester, withWorkoutSets: true);
 
       Finder workoutSet0Widget = find.byKey(Key('workoutSet0'));
       Finder addWorkoutSetBtn = find.byKey(Key('addWorkoutSet'));
@@ -59,28 +63,4 @@ void main() {
       expect(addWorkoutSetBtn, findsOneWidget);
     },
   );
-
-  testWidgets(
-    'Should navigate to add sets/reps',
-    (WidgetTester tester) async {
-      // should this be a bottom sheet? if so then another widget & test is needed
-    },
-  );
-}
-
-class MockMainModel extends Mock implements MainModel {}
-
-class TestUtils {
-  static runMockApp(
-    WidgetTester tester,
-    WorkoutExercise workoutExercise,
-  ) async {
-    MainModel model = MockMainModel();
-    Widget mockApp = ScopedModel<MainModel>(
-      model: model,
-      child: MaterialApp(home: WorkoutExerciseCard(0, 0, workoutExercise)),
-    );
-
-    await tester.pumpWidget(mockApp);
-  }
 }
