@@ -5,6 +5,9 @@ import 'package:workout_tracker/services/workout_service.dart';
 import '../services/exercise_service.dart';
 import '../models/exercise.dart';
 import './workouts.dart';
+import '../models/workout_set.dart';
+import '../models/workout.dart';
+import '../models/workout_exercise.dart';
 
 // TODO: can the exercise model code be moved to seperate Class or file?
 class MainModel extends Model with WorkoutsModel {
@@ -22,16 +25,21 @@ class MainModel extends Model with WorkoutsModel {
     return List.from(_exercises);
   }
 
-  MainModel({@required this.exerciseService, @required this.workoutService});
+  MainModel({@required this.exerciseService, @required this.workoutService}) {
+    addListener(() {
+      this.exerciseService.saveExercises(exercises);
+      this.workoutService.saveWorkouts(workouts);
+    });
+  }
 
   @override
   void addListener(listener) {
     super.addListener(listener);
-    loading = true;
     loadExercises();
   }
 
   loadExercises() {
+    loading = true;
     exerciseService
         .loadExercises()
         .then((exercises) => _exercises = exercises)

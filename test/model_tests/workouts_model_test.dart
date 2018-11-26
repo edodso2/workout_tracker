@@ -19,12 +19,17 @@ import 'package:workout_tracker/services/workout_service.dart';
 main() {
   group('WorkoutModel', () {
     MainModel model;
+    ExerciseService exerciseService;
     DateTime date;
 
     setUp(() {
       date = DateTime(2018, 11, 10); // nov 10, 2018
+      exerciseService = MockExerciseService();
+      
+      when(exerciseService.loadExercises()).thenAnswer((_) => Future.value([]));
+
       model = MainModel(
-        exerciseService: MockExerciseService(),
+        exerciseService: exerciseService,
         workoutService: MockWorkoutService(),
       );
     });
