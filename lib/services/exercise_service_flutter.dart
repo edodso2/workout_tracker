@@ -1,44 +1,34 @@
 import 'dart:convert';
 import 'dart:io';
 
+import './doc_reader_service.dart';
 import './exercise_service.dart';
 import '../models/exercise.dart';
 
 class ExerciseServiceFlutter extends ExerciseService {
   final Future<Directory> Function() getDirectory;
+  DocReaderService docReaderService;
 
   ExerciseServiceFlutter(
     this.getDirectory,
-  );
+  ) {
+    docReaderService = DocReaderService(this.getDirectory, 'ExerciseStorage');
+  }
 
   Future<List<Exercise>> loadExercises() async {
-    final file = await _getLocalFile();
-    final string = await file.readAsString();
-    final json = JsonDecoder().convert(string);
-    final todos = (json['exercises'])
+    final json = await docReaderService.readFromDisk();
+    final exercises = (json['exercises'])
         .map<Exercise>((exercise) => Exercise.fromJson(exercise))
         .toList();
 
-    return todos;
+    return exercises;
   }
 
   Future<File> saveExercises(List<Exercise> exercises) async {
-    final file = await _getLocalFile();
-
-    return file.writeAsString(JsonEncoder().convert({
+    final String json = JsonEncoder().convert({
       'exercises': exercises.map((exercise) => exercise.toJson()).toList(),
-    }));
-  }
+    });
 
-  Future<File> _getLocalFile() async {
-    final dir = await getDirectory();
-
-    return File('${dir.path}/ExercisesStorage.json');
-  }
-
-  Future<FileSystemEntity> clean() async {
-    final file = await _getLocalFile();
-
-    return file.delete();
+    return docReaderService.writeToDisk(json);
   }
 }

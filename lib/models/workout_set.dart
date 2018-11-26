@@ -8,4 +8,18 @@ class WorkoutSet {
     @required this.reps,
     this.weight
   });
+
+  Map<String, Object> toJson() {
+    return {
+      "reps": reps,
+      "weight": weight,
+    };
+  }
+
+  static WorkoutSet fromJson(Map<String, Object> json) {
+    return WorkoutSet(
+      reps: json['reps'] as int,
+      weight: json['weight'] as int,
+    );
+  }
 }

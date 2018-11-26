@@ -15,9 +15,25 @@ import 'package:workout_tracker/widgets/workout_calendar.dart';
 /// model_tests folder.
 void main() {
   NavigatorObserver mockObserver;
+  DateTime date;
+  MainModel model;
+  List<Workout> workouts;
+  List<WorkoutExercise> workoutExercises;
 
   setUp(() {
     mockObserver = MockNavigatorObserver();
+    model = MockMainModel();
+
+    date = DateTime(2018, 11, 10);
+    workoutExercises = [
+      WorkoutExercise(name: 'Deadlift', workoutSets: []),
+      WorkoutExercise(name: 'Bench Press', workoutSets: []),
+    ];
+    workouts = [
+      Workout(date: date, workoutExercises: workoutExercises),
+    ];
+
+    when(model.workouts).thenReturn(workouts);
   });
 
   testWidgets('Should navigate to workouts page', (WidgetTester tester) async {
@@ -26,8 +42,6 @@ void main() {
     /// this test will only check to ensure that when a calendar tile is clicked
     /// the right route name and params are passed to the navigator. This assumes
     /// that the RouterparamParser is working.
-    MainModel model = MockMainModel();
-    final date = DateTime.now();
     ParsedRoute parsedRoute;
     Widget mockApp = ScopedModel<MainModel>(
       model: model,
@@ -68,8 +82,6 @@ void main() {
   /// this test is actually testin the calendar_day widget and a new test
   /// file should be created for that widget.
   testWidgets('Should show marked dates', (WidgetTester tester) async {
-    MainModel model = MockMainModel();
-
     Widget mockApp = ScopedModel<MainModel>(
       model: model,
       child: MaterialApp(
@@ -81,22 +93,15 @@ void main() {
       ),
     );
 
-    final DateTime date = DateTime(2018, 11, 10);
-    List<WorkoutExercise> workoutExercises = [
-      WorkoutExercise(name: 'Deadlift', workoutSets: []),
-      WorkoutExercise(name: 'Bench Press', workoutSets: []),
-    ];
-    List<Workout> workouts = [
-      Workout(date: date, workoutExercises: workoutExercises),
-    ];
-    when(model.workouts).thenReturn(workouts);
-
     await tester.pumpWidget(mockApp);
 
-    Finder eventMarker1 = find.descendant(of: find.byKey(Key('day${date.day.toString()}')), matching: find.byType(Material));
+    Finder eventMarker1 = find.descendant(
+        of: find.byKey(Key('day${date.day.toString()}')),
+        matching: find.byType(Material));
     RenderPhysicalShape actualMarker1 = tester.renderObject(eventMarker1);
-    
-    Finder eventMarker2 = find.descendant(of: find.byKey(Key('day11')), matching: find.byType(Material));
+
+    Finder eventMarker2 = find.descendant(
+        of: find.byKey(Key('day11')), matching: find.byType(Material));
     RenderPhysicalShape actualMarker2 = tester.renderObject(eventMarker2);
 
     expect(actualMarker1.color == Colors.redAccent, true);
