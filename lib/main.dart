@@ -20,6 +20,9 @@ void main() {
     exerciseService: exercisesService,
   );
 
+  exerciseModel.loadExercises();
+  workoutsModel.loadWorkouts();
+
   runApp(App(
     workoutsModel: workoutsModel,
     exercisesModel: exerciseModel,

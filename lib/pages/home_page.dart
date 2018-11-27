@@ -85,12 +85,18 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final workoutsModel = ScopedModel.of<WorkoutsModel>(context);
-
-    if (workoutsModel.loading) {
-      return loadingView();
-    } else {
-      return homeView();
-    }
+    return ScopedModelDescendant(
+      builder: (
+        BuildContext context,
+        Widget child,
+        WorkoutsModel workoutsModel,
+      ) {
+        if (workoutsModel.loading) {
+          return loadingView();
+        } else {
+          return homeView();
+        }
+      },
+    );
   }
 }

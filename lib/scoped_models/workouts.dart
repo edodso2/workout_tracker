@@ -20,6 +20,20 @@ class WorkoutsModel extends Model {
 
   WorkoutsModel({@required this.workoutService});
 
+  loadWorkouts() {
+    loading = true;
+    notifyListeners();
+
+    workoutService
+        .loadWorkouts()
+        .then((workouts) => _workouts = workouts)
+        .catchError((_) => _workouts = [])
+        .whenComplete(() {
+      loading = false;
+      notifyListeners();
+    },);
+  }
+
   /// Returns the index of the workout on the specified date. -1 returned
   /// if workout does not exist on that date.
   int getWorkoutOnDate(DateTime date) {
@@ -30,6 +44,7 @@ class WorkoutsModel extends Model {
   void createWorkout(DateTime date) {
     final workout = Workout(date: date, workoutExercises: []);
     _workouts.add(workout);
+    workoutService.saveWorkouts(workouts);
     notifyListeners();
   }
 
@@ -38,6 +53,7 @@ class WorkoutsModel extends Model {
   /// source.
   void addWorkout(Workout workout) {
     _workouts.add(workout);
+    workoutService.saveWorkouts(workouts);
     notifyListeners();
   }
 
