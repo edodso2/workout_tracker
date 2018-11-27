@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../scoped_models/workouts.dart';
-import '../scoped_models/exercises.dart';
 import '../widgets/workout_calendar.dart';
 import '../widgets/exercises.dart';
 
@@ -13,26 +12,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
-  List<Widget> _widgetOptions;
-
-  @override
-  void initState() {
-    super.initState();
-    ExercisesModel exercisesModel = ScopedModel.of<ExercisesModel>(context);
-
-    // Set the tabs/options
-    _widgetOptions = [
-      Center(child: Text('Welcome')),
-      ScopedModel<ExercisesModel>(
-        model: exercisesModel,
-        child: WorkoutCalendar(),
-      ),
-      ScopedModel<ExercisesModel>(
-        model: exercisesModel,
-        child: Exercises(),
-      ),
-    ];
-  }
+  List<Widget> _widgetOptions = [
+    Center(child: Text('Welcome')),
+    WorkoutCalendar(),
+    Exercises(),
+  ];
 
   void _onItemTapped(int index) {
     setState(() {
