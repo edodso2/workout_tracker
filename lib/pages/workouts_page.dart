@@ -91,7 +91,8 @@ class WorkoutsPage extends StatelessWidget {
   }
 
   /// Workout not found scenario widgets
-  Widget buildNoWorkouts(BuildContext context, WorkoutsModel model, DateTime date) {
+  Widget buildNoWorkouts(
+      BuildContext context, WorkoutsModel model, DateTime date) {
     return Column(
       children: <Widget>[
         Expanded(

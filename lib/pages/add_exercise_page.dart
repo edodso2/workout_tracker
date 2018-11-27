@@ -33,47 +33,43 @@ class _AddExercisePageState extends State<AddExercisePage> {
 
   @override
   Widget build(BuildContext context) {
+    ExercisesModel exercisesModel = ScopedModel.of<ExercisesModel>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Add Exercise'),
       ),
-      body: ScopedModelDescendant<ExercisesModel>(builder: (
-        BuildContext context,
-        Widget child,
-        ExercisesModel model,
-      ) {
-        return Form(
-          key: _formKey,
-          child: Container(
-            padding: EdgeInsets.all(20.0),
-            child: Column(
-              children: <Widget>[
-                TextFormField(
-                  key: Key('name'),
-                  decoration: InputDecoration(
-                    labelText: 'Name',
-                  ),
-                  validator: (String value) {
-                    if (value.isEmpty) {
-                      return 'Name is required';
-                    }
-                  },
-                  onSaved: (String value) => _form['name'] = value,
+      body: Form(
+        key: _formKey,
+        child: Container(
+          padding: EdgeInsets.all(20.0),
+          child: Column(
+            children: <Widget>[
+              TextFormField(
+                key: Key('name'),
+                decoration: InputDecoration(
+                  labelText: 'Name',
                 ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                RaisedButton(
-                  color: Theme.of(context).accentColor,
-                  textColor: Colors.white,
-                  child: Text('Add'),
-                  onPressed: () => _submitForm(context, model.addExercise),
-                ),
-              ],
-            ),
+                validator: (String value) {
+                  if (value.isEmpty) {
+                    return 'Name is required';
+                  }
+                },
+                onSaved: (String value) => _form['name'] = value,
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              RaisedButton(
+                color: Theme.of(context).accentColor,
+                textColor: Colors.white,
+                child: Text('Add'),
+                onPressed: () => _submitForm(context, exercisesModel.addExercise),
+              ),
+            ],
           ),
-        );
-      }),
+        ),
+      ),
     );
   }
 }

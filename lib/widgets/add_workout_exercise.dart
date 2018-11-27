@@ -19,12 +19,16 @@ class AddWorkoutExercise extends StatelessWidget {
   final int index;
   final Function showModal;
 
-  AddWorkoutExercise(this.index, this.showModal, {Key key}) : super(key: key);
+  AddWorkoutExercise(
+    this.index,
+    this.showModal, {
+    Key key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    ExercisesModel exercisesModel = ScopedModel.of<ExercisesModel>(context);
     WorkoutsModel workoutsModel = ScopedModel.of<WorkoutsModel>(context);
+    ExercisesModel exercisesModel = ScopedModel.of<ExercisesModel>(context);
 
     return RaisedButton(
       key: Key('addExercisesButton'),
