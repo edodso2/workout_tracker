@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:date_utils/date_utils.dart';
 
 import '../widgets/exercise_list_modal.dart';
 import '../widgets/add_workout_exercise.dart';
@@ -28,9 +29,12 @@ class WorkoutsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final DateTime date = DateTime(year, month, day);
+    final String formattedDate = Utils.fullDayFormat(date);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Workouts'),
+        title: Text(formattedDate),
       ),
       body: ScopedModelDescendant<WorkoutsModel>(
         builder: (
@@ -38,7 +42,6 @@ class WorkoutsPage extends StatelessWidget {
           Widget child,
           WorkoutsModel model,
         ) {
-          final date = DateTime(year, month, day);
           int index = model.getWorkoutOnDate(date);
 
           return Container(
@@ -100,9 +103,6 @@ class WorkoutsPage extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(top: 20.0),
       child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Expanded(
             child: Text(

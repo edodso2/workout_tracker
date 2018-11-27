@@ -70,6 +70,7 @@ class _AddWorkoutSetState extends State<AddWorkoutSet> {
       builder: (BuildContext context) {
         return Column(
           children: <Widget>[
+            SizedBox(height: 15.0),
             Counter(
               startingValue: 5,
               onChanged: (value) {
@@ -78,6 +79,7 @@ class _AddWorkoutSetState extends State<AddWorkoutSet> {
                 });
               },
             ),
+            SizedBox(height: 20.0),
             Counter(
               startingValue: 135,
               increment: 5,
@@ -87,8 +89,11 @@ class _AddWorkoutSetState extends State<AddWorkoutSet> {
                 });
               },
             ),
+            SizedBox(height: 20.0),
             RaisedButton(
               key: Key('addSetButton'),
+              color: Theme.of(context).accentColor,
+              textColor: Colors.white,
               child: Text('Add Set'),
               onPressed: () => Navigator.pop(context, true),
             )
