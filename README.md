@@ -2,8 +2,13 @@
 
 A simple workout tracker for tracking weightlifting workouts. Built with Flutter.
 
-## Features
+## TODO
+1. Refactor unit tests to use the TestUtility class for
+getting mock exercises and workouts.
+2. Add more unit tests
+3. Improve on the generate route function in app.dart, possibly use a library for route params.
 
+## Features
 1. adding exercises
 2. creating workouts on a specified date
 3. adding exercises to the workout
@@ -12,7 +17,6 @@ A simple workout tracker for tracking weightlifting workouts. Built with Flutter
 
 
 Possible future features:
-
 1. data visualization for progress, such as plotting max weight lifted on a line chart.
 
 ## Architecture
