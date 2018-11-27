@@ -65,10 +65,7 @@ class WorkoutExerciseCard extends StatelessWidget {
           ),
         ),
       ));
-    }
 
-    // add a spacer only if there are going to be chips before the add icon
-    if (setsList.length > 0) {
       setsList.add(SizedBox(width: 8.0));
     }
 

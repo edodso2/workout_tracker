@@ -42,6 +42,7 @@ class WorkoutsPage extends StatelessWidget {
           int index = model.getWorkoutOnDate(date);
 
           return Container(
+            constraints: BoxConstraints.expand(),
             margin: EdgeInsets.only(bottom: 30.0),
             child: index >= 0
                 ? buildWorkoutList(
@@ -67,9 +68,12 @@ class WorkoutsPage extends StatelessWidget {
         Expanded(
           child: workout.workoutExercises.length > 0
               ? buildExerciseList(index, workout.workoutExercises)
-              : Text(
-                  'No exercises.',
-                  key: Key('noExercisesMessage'),
+              : Container(
+                  margin: EdgeInsets.only(top: 20.0),
+                  child: Text(
+                    'No exercises.',
+                    key: Key('noExercisesMessage'),
+                  ),
                 ),
         ),
         AddWorkoutExercise(
@@ -93,24 +97,30 @@ class WorkoutsPage extends StatelessWidget {
   /// Workout not found scenario widgets
   Widget buildNoWorkouts(
       BuildContext context, WorkoutsModel model, DateTime date) {
-    return Column(
-      children: <Widget>[
-        Expanded(
-          child: Text(
-            'No workout for this date.',
-            key: Key('noWorkoutMessage'),
+    return Container(
+      margin: EdgeInsets.only(top: 20.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Expanded(
+            child: Text(
+              'No workout for this date.',
+              key: Key('noWorkoutMessage'),
+            ),
           ),
-        ),
-        RaisedButton(
-          key: Key('createButton'),
-          color: Theme.of(context).accentColor,
-          textColor: Colors.white,
-          child: Text('Create Workout'),
-          onPressed: () {
-            model.createWorkout(date);
-          },
-        ),
-      ],
+          RaisedButton(
+            key: Key('createButton'),
+            color: Theme.of(context).accentColor,
+            textColor: Colors.white,
+            child: Text('Create Workout'),
+            onPressed: () {
+              model.createWorkout(date);
+            },
+          ),
+        ],
+      ),
     );
   }
 }
