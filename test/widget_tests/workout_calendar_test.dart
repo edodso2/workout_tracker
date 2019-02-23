@@ -24,7 +24,11 @@ void main() {
     mockObserver = MockNavigatorObserver();
     model = MockMainModel();
 
-    date = DateTime(2018, 11, 10);
+    date = DateTime(
+      DateTime.now().year,
+      DateTime.now().month,
+      10,
+    );
     workoutExercises = [
       WorkoutExercise(name: 'Deadlift', workoutSets: []),
       WorkoutExercise(name: 'Bench Press', workoutSets: []),
