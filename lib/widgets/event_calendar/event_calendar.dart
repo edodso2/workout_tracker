@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:date_utils/date_utils.dart';
+import 'package:date_utils/date_utils.dart' as utils;
 import './calendar_day.dart';
 
 class EventCalendar extends StatefulWidget {
@@ -33,13 +33,13 @@ class _EventCalendarState extends State<EventCalendar> {
 
   void previousMonth(DateTime selectedDate) {
     setState(() {
-      currentDate = Utils.previousMonth(selectedDate);
+      currentDate = utils.DateUtils.previousMonth(selectedDate);
     });
   }
 
   void nextMonth(DateTime selectedDate) {
     setState(() {
-      currentDate = Utils.nextMonth(selectedDate);
+      currentDate = utils.DateUtils.nextMonth(selectedDate);
     });
   }
 
@@ -47,7 +47,7 @@ class _EventCalendarState extends State<EventCalendar> {
     // The formatMonth method returns the full month and year
     // with a space in between so workaround below extracts month
     // and year separately.
-    List monthAndYear = Utils.formatMonth(selectedDate).split(' ');
+    List monthAndYear = utils.DateUtils.formatMonth(selectedDate).split(' ');
     String month = monthAndYear[0];
     String year = monthAndYear[1];
 
@@ -75,7 +75,8 @@ class _EventCalendarState extends State<EventCalendar> {
   }
 
   List<Widget> buildDays(selectedDate) {
-    final List<DateTime> datesOfMonth = Utils.daysInMonth(selectedDate);
+    final List<DateTime> datesOfMonth =
+        utils.DateUtils.daysInMonth(selectedDate);
     return datesOfMonth.map(
       (date) {
         /**
@@ -108,7 +109,7 @@ class _EventCalendarState extends State<EventCalendar> {
   }
 
   List<Widget> buildWeekdays() {
-    return Utils.weekdays.map(
+    return utils.DateUtils.weekdays.map(
       (weekday) {
         return Center(
           child: Text(

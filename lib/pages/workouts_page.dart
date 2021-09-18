@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:date_utils/date_utils.dart';
+import 'package:date_utils/date_utils.dart' as utils;
 
 import '../widgets/exercise_list_modal.dart';
 import '../widgets/add_workout_exercise.dart';
@@ -30,7 +30,7 @@ class WorkoutsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final DateTime date = DateTime(year, month, day);
-    final String formattedDate = Utils.fullDayFormat(date);
+    final String formattedDate = utils.DateUtils.fullDayFormat(date);
 
     return Scaffold(
       appBar: AppBar(
