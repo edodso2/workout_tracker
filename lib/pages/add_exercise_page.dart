@@ -5,6 +5,8 @@ import '../models/exercise.dart';
 import '../scoped_models/exercises.dart';
 
 class AddExercisePage extends StatefulWidget {
+  const AddExercisePage({Key key}) : super(key: key);
+
   @override
   _AddExercisePageState createState() => _AddExercisePageState();
 }
@@ -37,34 +39,35 @@ class _AddExercisePageState extends State<AddExercisePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Exercise'),
+        title: const Text('Add Exercise'),
       ),
       body: Form(
         key: _formKey,
         child: Container(
-          padding: EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(20.0),
           child: Column(
             children: <Widget>[
               TextFormField(
-                key: Key('name'),
-                decoration: InputDecoration(
+                key: const Key('name'),
+                decoration: const InputDecoration(
                   labelText: 'Name',
                 ),
                 validator: (String value) {
                   if (value.isEmpty) {
                     return 'Name is required';
                   }
+
+                  return null;
                 },
                 onSaved: (String value) => _form['name'] = value,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20.0,
               ),
-              RaisedButton(
-                color: Theme.of(context).accentColor,
-                textColor: Colors.white,
-                child: Text('Add'),
-                onPressed: () => _submitForm(context, exercisesModel.addExercise),
+              ElevatedButton(
+                child: const Text('Add'),
+                onPressed: () =>
+                    _submitForm(context, exercisesModel.addExercise),
               ),
             ],
           ),

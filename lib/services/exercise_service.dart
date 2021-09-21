@@ -16,5 +16,5 @@ abstract class ExerciseService {
   Future<List<Exercise>> loadExercises();
 
   // Persists exercises to local disk
-  Future saveExercises(List<Exercise> todos);
+  Future saveExercises(List<Exercise> exercises);
 }

@@ -50,7 +50,7 @@ void main() {
     Widget mockApp = ScopedModel<WorkoutsModel>(
       model: model,
       child: MaterialApp(
-        home: Scaffold(
+        home: const Scaffold(
           body: SingleChildScrollView(
             child: WorkoutCalendar(),
           ),
@@ -88,7 +88,7 @@ void main() {
   testWidgets('Should show marked dates', (WidgetTester tester) async {
     Widget mockApp = ScopedModel<WorkoutsModel>(
       model: model,
-      child: MaterialApp(
+      child: const MaterialApp(
         home: Scaffold(
           body: SingleChildScrollView(
             child: WorkoutCalendar(),
@@ -105,7 +105,7 @@ void main() {
     RenderPhysicalShape actualMarker1 = tester.renderObject(eventMarker1);
 
     Finder eventMarker2 = find.descendant(
-        of: find.byKey(Key('day11')), matching: find.byType(Material));
+        of: find.byKey(const Key('day11')), matching: find.byType(Material));
     RenderPhysicalShape actualMarker2 = tester.renderObject(eventMarker2);
 
     expect(actualMarker1.color == Colors.redAccent, true);

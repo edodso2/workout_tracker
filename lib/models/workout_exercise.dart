@@ -11,6 +11,7 @@ class WorkoutExercise extends Exercise {
     this.workoutSets,
   }) : super(name: name);
 
+  @override
   Map<String, Object> toJson() {
     final workoutSetsJson =
         workoutSets.map((workoutSet) => workoutSet.toJson()).toList();

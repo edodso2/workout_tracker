@@ -12,35 +12,36 @@ class App extends StatelessWidget {
   final WorkoutsModel workoutsModel;
   final ExercisesModel exercisesModel;
 
-  App({
+  const App({
+    Key key,
     @required this.workoutsModel,
     @required this.exercisesModel,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final homePage = ScopedModel<ExercisesModel>(
       model: exercisesModel,
-      child: HomePage(),
+      child: const HomePage(),
     );
     final addExercisePage = ScopedModel<ExercisesModel>(
       model: exercisesModel,
-      child: AddExercisePage(),
+      child: const AddExercisePage(),
     );
     final app = MaterialApp(
       title: 'Workout Tracker',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        accentColor: Colors.red,
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
+            .copyWith(secondary: Colors.red),
       ),
       routes: {
         '/': (BuildContext context) => homePage,
         '/addExercise': (BuildContext context) => addExercisePage,
       },
       onGenerateRoute: (RouteSettings settings) => _parseRouteParams(
-            settings,
-            exercisesModel,
-          ),
+        settings,
+        exercisesModel,
+      ),
     );
 
     return ScopedModel<WorkoutsModel>(
@@ -68,9 +69,9 @@ class App extends StatelessWidget {
 
       return MaterialPageRoute<bool>(
         builder: (BuildContext context) => ScopedModel<ExercisesModel>(
-              model: exercisesModel,
-              child: WorkoutsPage(year: year, month: month, day: day),
-            ),
+          model: exercisesModel,
+          child: WorkoutsPage(year: year, month: month, day: day),
+        ),
       );
     }
 

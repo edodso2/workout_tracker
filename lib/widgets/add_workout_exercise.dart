@@ -19,7 +19,7 @@ class AddWorkoutExercise extends StatelessWidget {
   final int index;
   final Function showModal;
 
-  AddWorkoutExercise(
+  const AddWorkoutExercise(
     this.index,
     this.showModal, {
     Key key,
@@ -30,11 +30,9 @@ class AddWorkoutExercise extends StatelessWidget {
     WorkoutsModel workoutsModel = ScopedModel.of<WorkoutsModel>(context);
     ExercisesModel exercisesModel = ScopedModel.of<ExercisesModel>(context);
 
-    return RaisedButton(
-      key: Key('addExercisesButton'),
-      color: Theme.of(context).accentColor,
-      textColor: Colors.white,
-      child: Text('Add Excercise'),
+    return ElevatedButton(
+      key: const Key('addExercisesButton'),
+      child: const Text('Add Excercise'),
       onPressed: () {
         showModal(
           context,

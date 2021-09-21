@@ -18,7 +18,7 @@ class RouterParamParser {
     if (pathElements[0] != '') {
       return null;
     }
-    if (routeNames.indexOf(pathElements[1]) != -1) {
+    if (routeNames.contains(pathElements[1])) {
       return ParsedRoute(pathElements[1], pathElements.sublist(2));
     }
     return null;

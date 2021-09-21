@@ -20,7 +20,8 @@ void main() {
         child: MaterialApp(
           home: ScopedModel<ExercisesModel>(
             model: exercisesModel,
-            child: AddWorkoutExercise(1, MockExerciseListModal.showListModal),
+            child: const AddWorkoutExercise(
+                1, MockExerciseListModal.showListModal),
           ),
         ),
       );
@@ -28,7 +29,7 @@ void main() {
 
       await tester.pumpWidget(mockApp);
 
-      Finder button = find.byKey(Key('addExercisesButton'));
+      Finder button = find.byKey(const Key('addExercisesButton'));
       await tester.tap(button);
 
       verify(workoutsModel.addWorkoutExercise(1, workoutExercise)).called(1);

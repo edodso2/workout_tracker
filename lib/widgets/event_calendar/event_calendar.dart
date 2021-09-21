@@ -8,11 +8,12 @@ class EventCalendar extends StatefulWidget {
   final DateTime date;
   final List<DateTime> markedDates;
 
-  EventCalendar({
+  const EventCalendar({
+    Key key,
     this.date,
     this.onDateSelected,
     this.markedDates,
-  });
+  }) : super(key: key);
 
   @override
   _EventCalendarState createState() => _EventCalendarState();
@@ -51,12 +52,12 @@ class _EventCalendarState extends State<EventCalendar> {
     String month = monthAndYear[0];
     String year = monthAndYear[1];
 
-    TextStyle headerTextStyle = TextStyle(fontSize: 18.0);
+    TextStyle headerTextStyle = const TextStyle(fontSize: 18.0);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         IconButton(
-          icon: Icon(Icons.chevron_left),
+          icon: const Icon(Icons.chevron_left),
           onPressed: () => previousMonth(selectedDate),
         ),
         // nesting another row to get the spacing right.
@@ -67,7 +68,7 @@ class _EventCalendarState extends State<EventCalendar> {
           ],
         ),
         IconButton(
-          icon: Icon(Icons.chevron_right),
+          icon: const Icon(Icons.chevron_right),
           onPressed: () => nextMonth(selectedDate),
         ),
       ],
@@ -86,9 +87,6 @@ class _EventCalendarState extends State<EventCalendar> {
          * easy since it returns a List of all the days that 
          * should be shown in the calendar view for the month
          * so that all the rows have seven dates in them.
-         * TODO: consider exposing an option to show all the
-         * dates but gray out the dates not in the the selected
-         * month.
          */
         if (date.month == selectedDate.month) {
           return CalendarDay(
@@ -102,7 +100,7 @@ class _EventCalendarState extends State<EventCalendar> {
             },
           );
         } else {
-          return Text('');
+          return const Text('');
         }
       },
     ).toList();
@@ -122,9 +120,10 @@ class _EventCalendarState extends State<EventCalendar> {
   }
 
   Widget buildCalendar(selectedDate) {
-    List<Widget> gridChildren = []
-      ..addAll(buildWeekdays())
-      ..addAll(buildDays(selectedDate));
+    List<Widget> gridChildren = [
+      ...buildWeekdays(),
+      ...buildDays(selectedDate)
+    ];
 
     return GridView.count(
       shrinkWrap: true,
@@ -133,8 +132,8 @@ class _EventCalendarState extends State<EventCalendar> {
       // https://github.com/flutter/flutter/issues/16125
       childAspectRatio: 1.01,
       children: gridChildren,
-      padding: EdgeInsets.only(top: 5.0, bottom: 0.0),
-      physics: ScrollPhysics(parent: NeverScrollableScrollPhysics()),
+      padding: const EdgeInsets.only(top: 5.0, bottom: 0.0),
+      physics: const ScrollPhysics(parent: NeverScrollableScrollPhysics()),
     );
   }
 

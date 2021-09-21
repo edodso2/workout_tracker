@@ -13,11 +13,12 @@ class Counter extends StatefulWidget {
   final int increment;
   final int startingValue;
 
-  Counter({
+  const Counter({
+    Key key,
     this.startingValue = 0,
     this.onChanged,
     this.increment = 1,
-  });
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -28,7 +29,8 @@ class Counter extends StatefulWidget {
 class _CounterState extends State<Counter> {
   int value;
 
-  void initState() { 
+  @override
+  void initState() {
     super.initState();
     value = widget.startingValue;
   }
@@ -41,13 +43,13 @@ class _CounterState extends State<Counter> {
         IconButton(
           icon: Icon(
             Icons.remove_circle_outline,
-            color: Theme.of(context).accentColor,
+            color: Theme.of(context).colorScheme.secondary,
           ),
           onPressed: _subtract,
         ),
         Text(
           value.toString(),
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 18.0,
             fontWeight: FontWeight.w600,
           ),
@@ -55,7 +57,7 @@ class _CounterState extends State<Counter> {
         IconButton(
           icon: Icon(
             Icons.add_circle_outline,
-            color: Theme.of(context).accentColor,
+            color: Theme.of(context).colorScheme.secondary,
           ),
           onPressed: _add,
         ),

@@ -54,7 +54,7 @@ void main() {
       await tester.pump(); // bottom sheet show animation starts
       await tester.pump(const Duration(seconds: 1)); // animation done
 
-      Finder listItem1 = find.byKey(Key('listItem0'));
+      Finder listItem1 = find.byKey(const Key('listItem0'));
 
       await tester.tap(listItem1);
 

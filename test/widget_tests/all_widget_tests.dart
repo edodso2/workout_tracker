@@ -1,17 +1,17 @@
-import './add_exercise_page_test.dart' as addExercisePage;
-import './workouts_page_test.dart' as workoutsPage;
-import './exercise_list_modal_test.dart' as listModal;
-import './add_workout_exercise_test.dart' as addWorkoutExercise;
-import './workout_calendar_test.dart' as workoutCalendar;
-import './workout_exercise_card_test.dart' as workoutExerciseCard;
-import './add_workout_set_test.dart' as addWorkoutSet;
+import './add_exercise_page_test.dart' as add_exercise_page;
+import './workouts_page_test.dart' as workouts_page;
+import './exercise_list_modal_test.dart' as list_modal;
+import './add_workout_exercise_test.dart' as add_workout_exercise;
+import './workout_calendar_test.dart' as workout_calendar;
+import './workout_exercise_card_test.dart' as workout_exercise_card;
+import './add_workout_set_test.dart' as add_workout_set;
 
 main() {
-  addExercisePage.main();
-  workoutsPage.main();
-  listModal.main();
-  addWorkoutExercise.main();
-  workoutCalendar.main();
-  workoutExerciseCard.main();
-  addWorkoutSet.main();
+  add_exercise_page.main();
+  workouts_page.main();
+  list_modal.main();
+  add_workout_exercise.main();
+  workout_calendar.main();
+  workout_exercise_card.main();
+  add_workout_set.main();
 }

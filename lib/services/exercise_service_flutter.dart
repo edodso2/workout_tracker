@@ -12,9 +12,10 @@ class ExerciseServiceFlutter extends ExerciseService {
   ExerciseServiceFlutter(
     this.getDirectory,
   ) {
-    docReaderService = DocReaderService(this.getDirectory, 'ExerciseStorage');
+    docReaderService = DocReaderService(getDirectory, 'ExerciseStorage');
   }
 
+  @override
   Future<List<Exercise>> loadExercises() async {
     final json = await docReaderService.readFromDisk();
     final exercises = (json['exercises'])
@@ -24,8 +25,9 @@ class ExerciseServiceFlutter extends ExerciseService {
     return exercises;
   }
 
+  @override
   Future<File> saveExercises(List<Exercise> exercises) async {
-    final String json = JsonEncoder().convert({
+    final String json = const JsonEncoder().convert({
       'exercises': exercises.map((exercise) => exercise.toJson()).toList(),
     });
 

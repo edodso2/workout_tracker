@@ -21,11 +21,12 @@ class WorkoutsPage extends StatelessWidget {
   final int month;
   final int day;
 
-  WorkoutsPage({
+  const WorkoutsPage({
+    Key key,
     this.year,
     this.month,
     this.day,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +46,8 @@ class WorkoutsPage extends StatelessWidget {
           int index = model.getWorkoutOnDate(date);
 
           return Container(
-            constraints: BoxConstraints.expand(),
-            margin: EdgeInsets.only(bottom: 30.0),
+            constraints: const BoxConstraints.expand(),
+            margin: const EdgeInsets.only(bottom: 30.0),
             child: index >= 0
                 ? buildWorkoutList(
                     context,
@@ -69,11 +70,11 @@ class WorkoutsPage extends StatelessWidget {
     return Column(
       children: <Widget>[
         Expanded(
-          child: workout.workoutExercises.length > 0
+          child: workout.workoutExercises.isNotEmpty
               ? buildExerciseList(index, workout.workoutExercises)
               : Container(
-                  margin: EdgeInsets.only(top: 20.0),
-                  child: Text(
+                  margin: const EdgeInsets.only(top: 20.0),
+                  child: const Text(
                     'No exercises.',
                     key: Key('noExercisesMessage'),
                   ),
@@ -82,7 +83,7 @@ class WorkoutsPage extends StatelessWidget {
         AddWorkoutExercise(
           index,
           ExerciseListModal.showListModal,
-          key: Key('addWorkoutExerciseWidget'),
+          key: const Key('addWorkoutExerciseWidget'),
         ),
       ],
     );
@@ -101,20 +102,18 @@ class WorkoutsPage extends StatelessWidget {
   Widget buildNoWorkouts(
       BuildContext context, WorkoutsModel model, DateTime date) {
     return Container(
-      margin: EdgeInsets.only(top: 20.0),
+      margin: const EdgeInsets.only(top: 20.0),
       child: Column(
         children: <Widget>[
-          Expanded(
+          const Expanded(
             child: Text(
               'No workout for this date.',
               key: Key('noWorkoutMessage'),
             ),
           ),
-          RaisedButton(
-            key: Key('createButton'),
-            color: Theme.of(context).accentColor,
-            textColor: Colors.white,
-            child: Text('Create Workout'),
+          ElevatedButton(
+            key: const Key('createButton'),
+            child: const Text('Create Workout'),
             onPressed: () {
               model.createWorkout(date);
             },

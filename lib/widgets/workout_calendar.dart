@@ -6,6 +6,8 @@ import '../scoped_models/workouts.dart';
 import '../widgets/event_calendar/event_calendar.dart';
 
 class WorkoutCalendar extends StatefulWidget {
+  const WorkoutCalendar({Key key}) : super(key: key);
+
   @override
   _WorkoutCalendar createState() => _WorkoutCalendar();
 }
@@ -14,7 +16,7 @@ class _WorkoutCalendar extends State<WorkoutCalendar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 15.0),
+      margin: const EdgeInsets.only(top: 15.0),
       child: ScopedModelDescendant<WorkoutsModel>(
         builder: (
           BuildContext context,

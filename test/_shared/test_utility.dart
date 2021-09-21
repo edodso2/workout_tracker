@@ -30,9 +30,10 @@ class TestUtility {
     await tester.pumpWidget(mockApp);
   }
 
-  static WorkoutExercise createWorkoutExercise({bool hasSets = false, String name}) {
+  static WorkoutExercise createWorkoutExercise(
+      {bool hasSets = false, String name}) {
     WorkoutExercise workoutExercise;
-    String exerciseName = name != null ? name : 'Deadlift';
+    String exerciseName = name ?? 'Deadlift';
     WorkoutSet workoutSet1 = WorkoutSet(reps: 10, weight: 135);
     List<WorkoutSet> workoutSets = [
       workoutSet1,
@@ -53,7 +54,8 @@ class TestUtility {
     return workoutExercise;
   }
 
-  static Workout createWorkout({bool hasExercises = false, bool hasSets = false}) {
+  static Workout createWorkout(
+      {bool hasExercises = false, bool hasSets = false}) {
     Workout workout;
     DateTime date = DateTime(2018, 11, 10);
     List<WorkoutExercise> workoutExercises = [

@@ -4,6 +4,8 @@ import 'package:scoped_model/scoped_model.dart';
 import '../scoped_models/exercises.dart';
 
 class Exercises extends StatelessWidget {
+  const Exercises({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ExercisesModel>(builder: (
@@ -12,14 +14,14 @@ class Exercises extends StatelessWidget {
       ExercisesModel model,
     ) {
       return Container(
-        margin: EdgeInsets.only(bottom: 30.0),
+        margin: const EdgeInsets.only(bottom: 30.0),
         child: Column(
           children: <Widget>[
             Expanded(
               child: ListView.builder(
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                       top: 15.0,
                       left: 15.0,
                       right: 15.0,
@@ -30,10 +32,8 @@ class Exercises extends StatelessWidget {
                 itemCount: model.exercises.length,
               ),
             ),
-            RaisedButton(
-              color: Theme.of(context).accentColor,
-              textColor: Colors.white,
-              child: Text('Add Excercise'),
+            ElevatedButton(
+              child: const Text('Add Excercise'),
               onPressed: () {
                 Navigator.pushNamed(context, '/addExercise');
               },

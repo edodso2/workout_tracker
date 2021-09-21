@@ -9,7 +9,7 @@ class WorkoutExerciseCard extends StatelessWidget {
   final int exerciseIndex;
   final WorkoutExercise exercise;
 
-  WorkoutExerciseCard(
+  const WorkoutExerciseCard(
     this.workoutIndex,
     this.exerciseIndex,
     this.exercise, {
@@ -19,9 +19,9 @@ class WorkoutExerciseCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
+      margin: const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
       child: Container(
-        padding: EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -29,9 +29,10 @@ class WorkoutExerciseCard extends StatelessWidget {
               exercise.name,
               textAlign: TextAlign.left,
             ),
-            SizedBox(height: 10.0),
-            Container(
-              height: 30.0,
+            const SizedBox(height: 10.0),
+            ConstrainedBox(
+              constraints:
+                  const BoxConstraints(minHeight: 30.0, maxHeight: 30.0),
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: _buildSetsList(context, exercise.workoutSets),
@@ -58,22 +59,22 @@ class WorkoutExerciseCard extends StatelessWidget {
         onTap: () => {},
         child: Chip(
           label: Text('${workoutSet.reps} x ${workoutSet.weight}'),
-          backgroundColor: Theme.of(context).accentColor,
-          labelStyle: TextStyle(
+          backgroundColor: Theme.of(context).colorScheme.secondary,
+          labelStyle: const TextStyle(
             color: Colors.white,
             fontSize: 12.0,
           ),
         ),
       ));
 
-      setsList.add(SizedBox(width: 8.0));
+      setsList.add(const SizedBox(width: 8.0));
     }
 
     // add the plus icon for adding a new set
     setsList.add(AddWorkoutSet(
       workoutIndex,
       exerciseIndex,
-      key: Key('addWorkoutSet'),
+      key: const Key('addWorkoutSet'),
     ));
 
     return setsList;

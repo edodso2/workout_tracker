@@ -19,9 +19,9 @@ void main() {
   /// and simply return different values from the mocked model
   /// using Mockito.
   WorkoutsModel model = MockWorkoutsModel();
-  final year = 2018;
-  final month = 11;
-  final day = 5;
+  const year = 2018;
+  const month = 11;
+  const day = 5;
   final date = DateTime(2018, 11, 5);
 
   group('Workout not found', () {
@@ -34,10 +34,10 @@ void main() {
 
         await tester.pumpWidget(mockApp);
 
-        Key messageKey = Key('noWorkoutMessage');
+        Key messageKey = const Key('noWorkoutMessage');
         Finder message = find.byKey(messageKey);
 
-        Key buttonKey = Key('createButton');
+        Key buttonKey = const Key('createButton');
         Finder button = find.byKey(buttonKey);
 
         expect(message, findsOneWidget);
@@ -53,7 +53,7 @@ void main() {
 
         await tester.pumpWidget(mockApp);
 
-        Key buttonKey = Key('createButton');
+        Key buttonKey = const Key('createButton');
         Finder button = find.byKey(buttonKey);
 
         await tester.tap(button);
@@ -79,7 +79,7 @@ void main() {
         (WidgetTester tester) async {
           await tester.pumpWidget(mockApp);
 
-          Key messageKey = Key('noExercisesMessage');
+          Key messageKey = const Key('noExercisesMessage');
           Finder message = find.byKey(messageKey);
 
           expect(message, findsOneWidget);
@@ -160,7 +160,7 @@ class TestUtil {
   ) async {
     await tester.pumpWidget(mockApp);
 
-    Key widgetKey = Key('addWorkoutExerciseWidget');
+    Key widgetKey = const Key('addWorkoutExerciseWidget');
     Finder widget = find.byKey(widgetKey);
 
     expect(widget, findsOneWidget);

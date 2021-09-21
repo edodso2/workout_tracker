@@ -1,7 +1,7 @@
-import './exercise_model_test.dart' as exerciseModel;
-import './workouts_model_test.dart' as workoutsModel;
+import './exercise_model_test.dart' as exercise_model;
+import './workouts_model_test.dart' as workouts_model;
 
 main() {
-  exerciseModel.main();
-  workoutsModel.main();
+  exercise_model.main();
+  workouts_model.main();
 }

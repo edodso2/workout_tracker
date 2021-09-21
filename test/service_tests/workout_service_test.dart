@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:test_api/test_api.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:workout_tracker/models/workout.dart';
 import 'package:workout_tracker/services/workout_service_flutter.dart';
 
-import '../_shared/TestUtility.dart';
+import '../_shared/test_utility.dart';
 
 main() {
   group('WorkoutService', () {

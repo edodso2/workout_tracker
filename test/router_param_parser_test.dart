@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test_api/test_api.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 import 'package:workout_tracker/router_param_parser.dart';
 
@@ -9,7 +9,7 @@ main() {
     RouterParamParser parser = RouterParamParser([
       workoutsPageRouteName,
     ]);
-    final RouteSettings settings = RouteSettings(name: '/workouts/1/2/3');
+    RouteSettings settings = const RouteSettings(name: '/workouts/1/2/3');
     ParsedRoute route = parser.parse(settings);
 
     expect(route.name, workoutsPageRouteName);

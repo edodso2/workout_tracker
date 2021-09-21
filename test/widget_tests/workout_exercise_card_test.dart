@@ -4,10 +4,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:workout_tracker/models/workout_exercise.dart';
 import 'package:workout_tracker/widgets/workout_exercise_card.dart';
 
-import '../_shared/TestUtility.dart';
+import '../_shared/test_utility.dart';
 
 void main() {
-
   // helper function for running the test app
   runMockApp(
     WidgetTester tester, {
@@ -43,8 +42,8 @@ void main() {
     (WidgetTester tester) async {
       await runMockApp(tester, withWorkoutSets: false);
 
-      Finder workoutSet0Widget = find.byKey(Key('workoutSet0'));
-      Finder addWorkoutSetBtn = find.byKey(Key('addWorkoutSet'));
+      Finder workoutSet0Widget = find.byKey(const Key('workoutSet0'));
+      Finder addWorkoutSetBtn = find.byKey(const Key('addWorkoutSet'));
 
       expect(workoutSet0Widget, findsNothing);
       expect(addWorkoutSetBtn, findsOneWidget);
@@ -56,8 +55,8 @@ void main() {
     (WidgetTester tester) async {
       await runMockApp(tester, withWorkoutSets: true);
 
-      Finder workoutSet0Widget = find.byKey(Key('workoutSet0'));
-      Finder addWorkoutSetBtn = find.byKey(Key('addWorkoutSet'));
+      Finder workoutSet0Widget = find.byKey(const Key('workoutSet0'));
+      Finder addWorkoutSetBtn = find.byKey(const Key('addWorkoutSet'));
 
       expect(workoutSet0Widget, findsOneWidget);
       expect(addWorkoutSetBtn, findsOneWidget);

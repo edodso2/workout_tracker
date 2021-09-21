@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-
 import '../models/workout.dart';
 import './doc_reader_service.dart';
 import './workout_service.dart';
@@ -13,9 +12,10 @@ class WorkoutServiceFlutter extends WorkoutService {
   WorkoutServiceFlutter(
     this.getDirectory,
   ) {
-    docReaderService = DocReaderService(this.getDirectory, 'WorkoutsStorage');
+    docReaderService = DocReaderService(getDirectory, 'WorkoutsStorage');
   }
 
+  @override
   Future<List<Workout>> loadWorkouts() async {
     final json = await docReaderService.readFromDisk();
     final workouts = (json['workouts'])
@@ -25,8 +25,9 @@ class WorkoutServiceFlutter extends WorkoutService {
     return workouts;
   }
 
+  @override
   Future<File> saveWorkouts(List<Workout> workouts) async {
-    final String json = JsonEncoder().convert({
+    final String json = const JsonEncoder().convert({
       'workouts': workouts.map((workout) => workout.toJson()).toList(),
     });
 

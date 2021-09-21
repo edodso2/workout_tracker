@@ -8,7 +8,7 @@ class AddWorkoutSet extends StatefulWidget {
   final int workoutIndex;
   final int exerciseIndex;
 
-  AddWorkoutSet(
+  const AddWorkoutSet(
     this.workoutIndex,
     this.exerciseIndex, {
     Key key,
@@ -39,10 +39,10 @@ class _AddWorkoutSetState extends State<AddWorkoutSet> {
       WorkoutsModel model,
     ) {
       return InkWell(
-        key: Key('addWorkoutSetBtn'),
+        key: const Key('addWorkoutSetBtn'),
         child: Icon(
           Icons.add_circle,
-          color: Theme.of(context).accentColor,
+          color: Theme.of(context).colorScheme.secondary,
           size: 30.0,
         ),
         borderRadius: BorderRadius.circular(50.0),
@@ -70,7 +70,7 @@ class _AddWorkoutSetState extends State<AddWorkoutSet> {
       builder: (BuildContext context) {
         return Column(
           children: <Widget>[
-            SizedBox(height: 15.0),
+            const SizedBox(height: 15.0),
             Counter(
               startingValue: 5,
               onChanged: (value) {
@@ -79,7 +79,7 @@ class _AddWorkoutSetState extends State<AddWorkoutSet> {
                 });
               },
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             Counter(
               startingValue: 135,
               increment: 5,
@@ -89,14 +89,16 @@ class _AddWorkoutSetState extends State<AddWorkoutSet> {
                 });
               },
             ),
-            SizedBox(height: 20.0),
-            RaisedButton(
-              key: Key('addSetButton'),
-              color: Theme.of(context).accentColor,
-              textColor: Colors.white,
-              child: Text('Add Set'),
+            const SizedBox(height: 20.0),
+            ElevatedButton(
+              key: const Key('addSetButton'),
               onPressed: () => Navigator.pop(context, true),
-            )
+              child: const Text('Add Set'),
+              style: ElevatedButton.styleFrom(
+                primary: Theme.of(context).colorScheme.secondary, // background
+                onPrimary: Colors.white, // foreground
+              ),
+            ),
           ],
         );
       },

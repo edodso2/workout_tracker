@@ -11,7 +11,7 @@ class ExerciseListModal {
       context: context,
       builder: (BuildContext context) {
         return Container(
-          padding: EdgeInsets.symmetric(vertical: 15.0),
+          padding: const EdgeInsets.symmetric(vertical: 15.0),
           child: ListView.builder(
             itemBuilder: (BuildContext context, int index) {
               return ListTile(
@@ -21,7 +21,7 @@ class ExerciseListModal {
                   /// base class later if we need to reuse this for a
                   /// list of items with no 'name' value.
                   items[index].name,
-                  style: TextStyle(fontSize: 16.0),
+                  style: const TextStyle(fontSize: 16.0),
                 ),
                 onTap: () {
                   Navigator.pop(context, items[index]);

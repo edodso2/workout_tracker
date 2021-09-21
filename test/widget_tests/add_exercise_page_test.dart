@@ -15,12 +15,12 @@ void main() {
     ExercisesModel model = MockMainModel();
     Widget mockApp = ScopedModel<ExercisesModel>(
       model: model,
-      child: MaterialApp(home: AddExercisePage()),
+      child: const MaterialApp(home: AddExercisePage()),
     );
 
     await tester.pumpWidget(mockApp);
 
-    Finder nameField = find.byKey(Key('name'));
+    Finder nameField = find.byKey(const Key('name'));
     await tester.enterText(nameField, 'Curls');
 
     await tester.tap(find.text('Add'));

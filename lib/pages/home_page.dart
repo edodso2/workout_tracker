@@ -6,16 +6,18 @@ import '../widgets/workout_calendar.dart';
 import '../widgets/exercises.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({Key key}) : super(key: key);
+
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
-  List<Widget> _widgetOptions = [
-    Center(child: Text('Welcome')),
-    WorkoutCalendar(),
-    Exercises(),
+  final List<Widget> _widgetOptions = [
+    const Center(child: Text('Welcome')),
+    const WorkoutCalendar(),
+    const Exercises(),
   ];
 
   void _onItemTapped(int index) {
@@ -27,9 +29,9 @@ class _HomePageState extends State<HomePage> {
   Widget loadingView() {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Workout Tracker'),
+        title: const Text('Workout Tracker'),
       ),
-      body: Center(
+      body: const Center(
         child: CircularProgressIndicator(),
       ),
     );
@@ -38,7 +40,7 @@ class _HomePageState extends State<HomePage> {
   Widget homeView() {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Workout Tracker'),
+        title: const Text('Workout Tracker'),
       ),
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: buildBottomNavigationBar(),
@@ -47,18 +49,18 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildBottomNavigationBar() {
     return BottomNavigationBar(
-      items: <BottomNavigationBarItem>[
+      items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
-          title: Text('Home'),
+          label: 'Home',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.calendar_today),
-          title: Text('Calendar'),
+          label: 'Calendar',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.directions_bike),
-          title: Text('Exercises'),
+          label: 'Exercises',
         ),
       ],
       currentIndex: _selectedIndex,

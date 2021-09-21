@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:test_api/test_api.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:workout_tracker/models/exercise.dart';
 import 'package:workout_tracker/services/exercise_service_flutter.dart';
 

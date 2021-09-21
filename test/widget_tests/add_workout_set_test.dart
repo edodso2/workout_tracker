@@ -15,7 +15,7 @@ void main() {
       WorkoutsModel model = MockMainModel();
       Widget mockApp = ScopedModel<WorkoutsModel>(
         model: model,
-        child: MaterialApp(
+        child: const MaterialApp(
           home: Scaffold(body: AddWorkoutSet(0, 0)),
         ),
       );
@@ -30,14 +30,14 @@ void main() {
 
       await tester.pumpWidget(mockApp);
 
-      Finder addButton = find.byKey(Key('addWorkoutSetBtn'));
+      Finder addButton = find.byKey(const Key('addWorkoutSetBtn'));
 
       await tester.tap(addButton);
 
       await tester.pump(); // bottom sheet show animation starts
       await tester.pump(const Duration(seconds: 1)); // animation done
 
-      Finder addSetButton = find.byKey(Key('addSetButton'));
+      Finder addSetButton = find.byKey(const Key('addSetButton'));
 
       expect(addSetButton, findsOneWidget);
 

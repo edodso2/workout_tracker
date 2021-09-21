@@ -1,5 +1,5 @@
-import './exercise_service_test.dart' as exerciseService;
+import './exercise_service_test.dart' as exercise_service;
 
 main() {
-  exerciseService.main();
+  exercise_service.main();
 }

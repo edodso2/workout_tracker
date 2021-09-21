@@ -10,7 +10,7 @@ class DocReaderService {
   dynamic readFromDisk() async {
     final file = await _getLocalFile();
     final string = await file.readAsString();
-    final json = JsonDecoder().convert(string);
+    final json = const JsonDecoder().convert(string);
 
     return json;
   }
