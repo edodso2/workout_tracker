@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../scoped_models/workouts.dart';
+import '../scoped_models/exercises.dart';
 import '../widgets/workout_calendar.dart';
 import '../widgets/exercises.dart';
 
@@ -19,6 +20,16 @@ class _HomePageState extends State<HomePage> {
     const WorkoutCalendar(),
     const Exercises(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Load all the data here. This needs to be done in an initState
+    // call according to the example on flutter.io
+    ScopedModel.of<WorkoutsModel>(context).loadWorkouts();
+    ScopedModel.of<ExercisesModel>(context).loadExercises();
+  }
 
   void _onItemTapped(int index) {
     setState(() {
