@@ -28,10 +28,12 @@ class WorkoutsModel extends Model {
         .loadWorkouts()
         .then((workouts) => _workouts = workouts)
         .catchError((_) => _workouts = [])
-        .whenComplete(() {
-      loading = false;
-      notifyListeners();
-    },);
+        .whenComplete(
+      () {
+        loading = false;
+        notifyListeners();
+      },
+    );
   }
 
   /// Returns the index of the workout on the specified date. -1 returned
@@ -63,6 +65,7 @@ class WorkoutsModel extends Model {
     WorkoutExercise workoutExercise,
   ) {
     _workouts[index].workoutExercises.add(workoutExercise);
+    workoutService.saveWorkouts(workouts);
     notifyListeners();
   }
 
@@ -81,6 +84,7 @@ class WorkoutsModel extends Model {
         .workoutExercises[workoutExerciseIndex]
         .workoutSets
         .add(workoutSet);
+    workoutService.saveWorkouts(workouts);
     notifyListeners();
   }
 }
