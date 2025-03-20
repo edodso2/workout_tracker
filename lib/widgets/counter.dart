@@ -14,11 +14,11 @@ class Counter extends StatefulWidget {
   final int startingValue;
 
   const Counter({
-    Key key,
+    super.key,
     this.startingValue = 0,
-    this.onChanged,
+    required this.onChanged,
     this.increment = 1,
-  }) : super(key: key);
+  });
 
   @override
   State<StatefulWidget> createState() {
@@ -27,7 +27,7 @@ class Counter extends StatefulWidget {
 }
 
 class _CounterState extends State<Counter> {
-  int value;
+  late int value;
 
   @override
   void initState() {

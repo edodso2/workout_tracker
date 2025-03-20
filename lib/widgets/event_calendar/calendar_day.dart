@@ -7,10 +7,10 @@ class CalendarDay extends StatelessWidget {
 
   const CalendarDay(
     this.date, {
-    Key key,
+    super.key,
     this.isMarked = false,
-    this.onDateSelected,
-  }) : super(key: key);
+    required this.onDateSelected,
+  });
 
   @override
   Widget build(BuildContext context) {

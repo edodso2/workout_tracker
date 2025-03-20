@@ -13,10 +13,10 @@ class App extends StatelessWidget {
   final ExercisesModel exercisesModel;
 
   const App({
-    Key key,
-    @required this.workoutsModel,
-    @required this.exercisesModel,
-  }) : super(key: key);
+    super.key,
+    required this.workoutsModel,
+    required this.exercisesModel,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class App extends StatelessWidget {
     );
   }
 
-  Route<dynamic> _parseRouteParams(
+  Route<dynamic>? _parseRouteParams(
     RouteSettings settings,
     ExercisesModel exerciseModel,
   ) {
@@ -58,7 +58,7 @@ class App extends StatelessWidget {
     RouterParamParser parser = RouterParamParser([
       workoutsPageRouteName,
     ]);
-    ParsedRoute route = parser.parse(settings);
+    final route = parser.parse(settings);
 
     if (route == null) return null;
 

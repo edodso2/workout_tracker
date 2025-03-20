@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import './workout_exercise.dart';
 
 class Workout {
@@ -7,8 +5,8 @@ class Workout {
   final List<WorkoutExercise> workoutExercises;
 
   Workout({
-    @required this.date,
-    this.workoutExercises,
+    required this.date,
+    required this.workoutExercises,
   });
 
   Map<String, Object> toJson() {

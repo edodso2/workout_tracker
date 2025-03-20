@@ -7,7 +7,7 @@ import './workout_service.dart';
 
 class WorkoutServiceFlutter extends WorkoutService {
   final Future<Directory> Function() getDirectory;
-  DocReaderService docReaderService;
+  late DocReaderService docReaderService;
 
   WorkoutServiceFlutter(
     this.getDirectory,

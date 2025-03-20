@@ -12,7 +12,7 @@ void main() {
     exercise2,
   ];
 
-  BuildContext savedContext;
+  late BuildContext savedContext;
   Widget mockApp = MaterialApp(
     home: Builder(
       builder: (BuildContext context) {
@@ -41,13 +41,13 @@ void main() {
   testWidgets(
     'Should return selected exercise when closed',
     (WidgetTester tester) async {
-      Exercise selectedExercise;
+      late Exercise selectedExercise;
 
       await tester.pumpWidget(mockApp);
 
       ExerciseListModal.showListModal(savedContext, exercises).then(
-        (Exercise value) {
-          selectedExercise = value;
+        (Exercise? value) {
+          selectedExercise = value ?? Exercise(name: 'Bench Press');
         },
       );
 

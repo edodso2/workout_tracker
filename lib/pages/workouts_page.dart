@@ -22,11 +22,11 @@ class WorkoutsPage extends StatelessWidget {
   final int day;
 
   const WorkoutsPage({
-    Key key,
-    this.year,
-    this.month,
-    this.day,
-  }) : super(key: key);
+    super.key,
+    required this.year,
+    required this.month,
+    required this.day,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class WorkoutsPage extends StatelessWidget {
       body: ScopedModelDescendant<WorkoutsModel>(
         builder: (
           BuildContext context,
-          Widget child,
+          Widget? child,
           WorkoutsModel model,
         ) {
           int index = model.getWorkoutOnDate(date);

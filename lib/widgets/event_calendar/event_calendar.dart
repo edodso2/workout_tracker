@@ -5,31 +5,27 @@ import './calendar_day.dart';
 
 class EventCalendar extends StatefulWidget {
   final ValueChanged<DateTime> onDateSelected;
-  final DateTime date;
+  final DateTime? date;
   final List<DateTime> markedDates;
 
   const EventCalendar({
-    Key key,
+    super.key,
     this.date,
-    this.onDateSelected,
-    this.markedDates,
-  }) : super(key: key);
+    required this.onDateSelected,
+    required this.markedDates,
+  });
 
   @override
   _EventCalendarState createState() => _EventCalendarState();
 }
 
 class _EventCalendarState extends State<EventCalendar> {
-  DateTime currentDate;
+  late DateTime currentDate;
 
   @override
   void initState() {
     super.initState();
-    if (widget.date == null) {
-      currentDate = DateTime.now();
-    } else {
-      currentDate = widget.date;
-    }
+    currentDate = widget.date ?? DateTime.now();
   }
 
   void previousMonth(DateTime selectedDate) {

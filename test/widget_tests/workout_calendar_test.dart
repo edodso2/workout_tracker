@@ -10,19 +10,22 @@ import 'package:workout_tracker/router_param_parser.dart';
 import 'package:workout_tracker/scoped_models/workouts.dart';
 import 'package:workout_tracker/widgets/workout_calendar.dart';
 
+import '../_shared/test_utility.dart';
+import '../model_tests/workouts_model_test.mocks.dart';
+
 /// This file will contain UI tests for the add exercise widget page
 /// and will mock the MainModel. The MainModel is tested under the
 /// model_tests folder.
 void main() {
-  NavigatorObserver mockObserver;
-  DateTime date;
-  WorkoutsModel model;
-  List<Workout> workouts;
-  List<WorkoutExercise> workoutExercises;
+  late NavigatorObserver mockObserver;
+  late DateTime date;
+  late MockWorkoutsModel mockWorkoutsModel;
+  late List<Workout> workouts;
+  late List<WorkoutExercise> workoutExercises;
 
   setUp(() {
     mockObserver = MockNavigatorObserver();
-    model = MockMainModel();
+    mockWorkoutsModel = MockWorkoutsModel(workoutService: MockWorkoutService());
 
     date = DateTime(
       DateTime.now().year,
@@ -37,7 +40,7 @@ void main() {
       Workout(date: date, workoutExercises: workoutExercises),
     ];
 
-    when(model.workouts).thenReturn(workouts);
+    mockWorkoutsModel.workouts = workouts;
   });
 
   testWidgets('Should navigate to workouts page', (WidgetTester tester) async {
@@ -46,9 +49,9 @@ void main() {
     /// this test will only check to ensure that when a calendar tile is clicked
     /// the right route name and params are passed to the navigator. This assumes
     /// that the RouterparamParser is working.
-    ParsedRoute parsedRoute;
+    ParsedRoute? parsedRoute;
     Widget mockApp = ScopedModel<WorkoutsModel>(
-      model: model,
+      model: mockWorkoutsModel,
       child: MaterialApp(
         home: const Scaffold(
           body: SingleChildScrollView(
@@ -76,10 +79,10 @@ void main() {
     Finder day = find.text(date.day.toString());
     await tester.tap(day);
 
-    expect(parsedRoute.name, 'workouts');
-    expect(parsedRoute.params[0], date.year.toString());
-    expect(parsedRoute.params[1], date.month.toString());
-    expect(parsedRoute.params[2], date.day.toString());
+    expect(parsedRoute!.name, 'workouts');
+    expect(parsedRoute!.params[0], date.year.toString());
+    expect(parsedRoute!.params[1], date.month.toString());
+    expect(parsedRoute!.params[2], date.day.toString());
   });
 
   /// TODO: this test is useful but it does not really belong in this file
@@ -87,7 +90,7 @@ void main() {
   /// file should be created for that widget.
   testWidgets('Should show marked dates', (WidgetTester tester) async {
     Widget mockApp = ScopedModel<WorkoutsModel>(
-      model: model,
+      model: mockWorkoutsModel,
       child: const MaterialApp(
         home: Scaffold(
           body: SingleChildScrollView(
@@ -112,8 +115,6 @@ void main() {
     expect(actualMarker2.color == Colors.transparent, true);
   });
 }
-
-class MockMainModel extends Mock implements WorkoutsModel {}
 
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 

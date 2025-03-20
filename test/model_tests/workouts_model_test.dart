@@ -1,11 +1,14 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mockito/annotations.dart';
 
 import 'package:workout_tracker/models/workout.dart';
 import 'package:workout_tracker/models/workout_exercise.dart';
 import 'package:workout_tracker/models/workout_set.dart';
 import 'package:workout_tracker/scoped_models/workouts.dart';
 import 'package:workout_tracker/services/workout_service.dart';
+
+@GenerateNiceMocks([MockSpec<WorkoutService>()])
+import 'workouts_model_test.mocks.dart';
 
 /// This test will test all the functions of the model/state management.
 /// The UI tests can then assume that the model functions all work and be
@@ -17,8 +20,8 @@ import 'package:workout_tracker/services/workout_service.dart';
 /// logic that is already implemented in the model...
 main() {
   group('WorkoutModel', () {
-    WorkoutsModel model;
-    DateTime date;
+    late WorkoutsModel model;
+    late DateTime date;
 
     setUp(() {
       date = DateTime(2018, 11, 10); // nov 10, 2018
@@ -74,5 +77,3 @@ main() {
     });
   });
 }
-
-class MockWorkoutService extends Mock implements WorkoutService {}

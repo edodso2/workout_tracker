@@ -11,8 +11,8 @@ class AddWorkoutSet extends StatefulWidget {
   const AddWorkoutSet(
     this.workoutIndex,
     this.exerciseIndex, {
-    Key key,
-  }) : super(key: key);
+    super.key
+  });
 
   @override
   State<StatefulWidget> createState() {
@@ -21,8 +21,8 @@ class AddWorkoutSet extends StatefulWidget {
 }
 
 class _AddWorkoutSetState extends State<AddWorkoutSet> {
-  int reps;
-  int weight;
+  late int reps;
+  late int weight;
 
   @override
   void initState() {
@@ -35,7 +35,7 @@ class _AddWorkoutSetState extends State<AddWorkoutSet> {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<WorkoutsModel>(builder: (
       BuildContext context,
-      Widget child,
+      Widget? child,
       WorkoutsModel model,
     ) {
       return InkWell(
@@ -95,8 +95,8 @@ class _AddWorkoutSetState extends State<AddWorkoutSet> {
               onPressed: () => Navigator.pop(context, true),
               child: const Text('Add Set'),
               style: ElevatedButton.styleFrom(
-                primary: Theme.of(context).colorScheme.secondary, // background
-                onPrimary: Colors.white, // foreground
+                backgroundColor: Theme.of(context).colorScheme.secondary, // background
+                foregroundColor: Colors.white, // foreground
               ),
             ),
           ],

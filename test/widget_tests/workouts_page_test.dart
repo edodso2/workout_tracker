@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:mockito/mockito.dart';
 
 import 'package:workout_tracker/models/workout.dart';
 import 'package:workout_tracker/models/workout_exercise.dart';
 import 'package:workout_tracker/pages/workouts_page.dart';
 import 'package:workout_tracker/scoped_models/exercises.dart';
 import 'package:workout_tracker/scoped_models/workouts.dart';
+
+import '../_shared/test_utility.dart';
+import '../model_tests/exercise_model_test.mocks.dart';
+import '../model_tests/workouts_model_test.mocks.dart';
 
 /// TODO: the grouping in this file is ok but makes it a bit hard to read.
 /// I prefer the approach I used for the workout_exercise_card_test file
@@ -18,7 +21,7 @@ void main() {
   /// it is mocked. Can also use the same date for all the tests
   /// and simply return different values from the mocked model
   /// using Mockito.
-  WorkoutsModel model = MockWorkoutsModel();
+  MockWorkoutsModel model = MockWorkoutsModel(workoutService: MockWorkoutService());
   const year = 2018;
   const month = 11;
   const day = 5;
@@ -30,7 +33,7 @@ void main() {
       (WidgetTester tester) async {
         Widget mockApp = TestUtil.createMockApp(model, year, month, day);
 
-        when(model.getWorkoutOnDate(date)).thenReturn(-1);
+        model.workoutsOnDate = -1;
 
         await tester.pumpWidget(mockApp);
 
@@ -49,7 +52,7 @@ void main() {
       (WidgetTester tester) async {
         Widget mockApp = TestUtil.createMockApp(model, year, month, day);
 
-        when(model.getWorkoutOnDate(date)).thenReturn(-1);
+        model.workoutsOnDate = -1;
 
         await tester.pumpWidget(mockApp);
 
@@ -58,20 +61,20 @@ void main() {
 
         await tester.tap(button);
 
-        verify(model.createWorkout(date)).called(1);
+        expect(model.createWorkoutCalls.length, 1);
       },
     );
   });
   group('Workout found', () {
     group('Exercises not found', () {
-      Widget mockApp;
+      late Widget mockApp;
       List<Workout> workouts;
 
       setUp(() {
         mockApp = TestUtil.createMockApp(model, year, month, day);
         workouts = [Workout(date: date, workoutExercises: [])];
-        when(model.getWorkoutOnDate(date)).thenReturn(0);
-        when(model.workouts).thenReturn(workouts);
+        model.workoutsOnDate = 0;
+        model.workouts = workouts;
       });
 
       testWidgets(
@@ -94,7 +97,7 @@ void main() {
       );
     });
     group('Exercises found', () {
-      Widget mockApp;
+      late Widget mockApp;
       List<WorkoutExercise> workoutExercises;
       List<Workout> workouts;
 
@@ -107,8 +110,8 @@ void main() {
         workouts = [
           Workout(date: date, workoutExercises: workoutExercises),
         ];
-        when(model.getWorkoutOnDate(date)).thenReturn(0);
-        when(model.workouts).thenReturn(workouts);
+        model.workoutsOnDate = 0;
+        model.workouts = workouts;
       });
 
       testWidgets(
@@ -137,17 +140,13 @@ void main() {
   });
 }
 
-class MockWorkoutsModel extends Mock implements WorkoutsModel {}
-
-class MockExercisesModel extends Mock implements ExercisesModel {}
-
 class TestUtil {
   static Widget createMockApp(model, year, month, day) {
     return ScopedModel<WorkoutsModel>(
       model: model,
       child: MaterialApp(
         home: ScopedModel<ExercisesModel>(
-          model: MockExercisesModel(), // needed for the add exercises widget
+          model: MockExercisesModel(exerciseService: MockExerciseService()), // needed for the add exercises widget
           child: WorkoutsPage(year: year, month: month, day: day),
         ),
       ),

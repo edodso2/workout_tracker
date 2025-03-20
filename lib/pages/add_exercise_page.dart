@@ -5,8 +5,8 @@ import '../models/exercise.dart';
 import '../scoped_models/exercises.dart';
 
 class AddExercisePage extends StatefulWidget {
-  const AddExercisePage({Key key}) : super(key: key);
-
+  const AddExercisePage({super.key});
+  
   @override
   _AddExercisePageState createState() => _AddExercisePageState();
 }
@@ -17,18 +17,18 @@ class _AddExercisePageState extends State<AddExercisePage> {
     'name': '',
   };
 
-  void _submitForm(BuildContext context, Function addExercise) {
-    if (!_formKey.currentState.validate()) {
+  void _submitForm(BuildContext context, Function(Exercise) addExercise) {
+    if (!_formKey.currentState!.validate()) {
       return;
     }
-
+    
     // save the values of all the form fields
-    _formKey.currentState.save();
-
+    _formKey.currentState!.save();
+    
     // add the new exercise to the scoped model
-    final Exercise exercise = Exercise(name: _form['name']);
+    final Exercise exercise = Exercise(name: _form['name'] as String);
     addExercise(exercise);
-
+    
     // go back...
     Navigator.pop(context);
   }
@@ -36,7 +36,7 @@ class _AddExercisePageState extends State<AddExercisePage> {
   @override
   Widget build(BuildContext context) {
     ExercisesModel exercisesModel = ScopedModel.of<ExercisesModel>(context);
-
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Exercise'),
@@ -52,22 +52,24 @@ class _AddExercisePageState extends State<AddExercisePage> {
                 decoration: const InputDecoration(
                   labelText: 'Name',
                 ),
-                validator: (String value) {
-                  if (value.isEmpty) {
+                validator: (String? value) {
+                  if (value == null || value.isEmpty) {
                     return 'Name is required';
                   }
-
                   return null;
                 },
-                onSaved: (String value) => _form['name'] = value,
+                onSaved: (String? value) => _form['name'] = value ?? '',
               ),
               const SizedBox(
                 height: 20.0,
               ),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Theme.of(context).colorScheme.secondary,
+                  foregroundColor: Colors.white,
+                ),
+                onPressed: () => _submitForm(context, exercisesModel.addExercise),
                 child: const Text('Add'),
-                onPressed: () =>
-                    _submitForm(context, exercisesModel.addExercise),
               ),
             ],
           ),

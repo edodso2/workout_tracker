@@ -4,13 +4,13 @@ import 'package:scoped_model/scoped_model.dart';
 import '../scoped_models/exercises.dart';
 
 class Exercises extends StatelessWidget {
-  const Exercises({Key key}) : super(key: key);
+  const Exercises({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ExercisesModel>(builder: (
       BuildContext context,
-      Widget child,
+      Widget? child,
       ExercisesModel model,
     ) {
       return Container(

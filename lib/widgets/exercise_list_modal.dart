@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-
-import '../models/exercise.dart';
+import 'package:workout_tracker/models/exercise.dart';
 
 class ExerciseListModal {
-  static Future<Exercise> showListModal(
+  static Future<Exercise?> showListModal(
     BuildContext context,
-    List<dynamic> items,
+    List<Exercise> items,
   ) {
-    return showModalBottomSheet(
+    return showModalBottomSheet<Exercise>(
       context: context,
       builder: (BuildContext context) {
         return Container(

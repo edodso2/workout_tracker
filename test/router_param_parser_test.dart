@@ -10,9 +10,9 @@ main() {
       workoutsPageRouteName,
     ]);
     RouteSettings settings = const RouteSettings(name: '/workouts/1/2/3');
-    ParsedRoute route = parser.parse(settings);
+    ParsedRoute? route = parser.parse(settings);
 
-    expect(route.name, workoutsPageRouteName);
+    expect(route!.name, workoutsPageRouteName);
     expect(route.params[0], '1');
     expect(route.params[1], '2');
     expect(route.params[2], '3');

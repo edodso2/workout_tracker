@@ -22,8 +22,8 @@ class AddWorkoutExercise extends StatelessWidget {
   const AddWorkoutExercise(
     this.index,
     this.showModal, {
-    Key key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +37,13 @@ class AddWorkoutExercise extends StatelessWidget {
         showModal(
           context,
           exercisesModel.exercises,
-        ).then((Exercise exercise) {
-          workoutsModel.addWorkoutExercise(
-            index,
-            WorkoutExercise(name: exercise.name, workoutSets: []),
-          );
+        ).then((Exercise? exercise) {
+          if (exercise != null) {
+            workoutsModel.addWorkoutExercise(
+              index,
+              WorkoutExercise(name: exercise.name, workoutSets: []),
+            );
+          }
         });
       },
     );

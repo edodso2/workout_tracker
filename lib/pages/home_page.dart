@@ -7,7 +7,7 @@ import '../widgets/workout_calendar.dart';
 import '../widgets/exercises.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -85,7 +85,7 @@ class _HomePageState extends State<HomePage> {
     return ScopedModelDescendant(
       builder: (
         BuildContext context,
-        Widget child,
+        Widget? child,
         WorkoutsModel workoutsModel,
       ) {
         if (workoutsModel.loading) {

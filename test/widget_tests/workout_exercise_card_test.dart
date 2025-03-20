@@ -13,6 +13,7 @@ void main() {
     bool withWorkoutSets = false,
   }) async {
     WorkoutExercise workoutExercise = TestUtility.createWorkoutExercise(
+      name: 'Deadlift',
       hasSets: withWorkoutSets,
     );
     WorkoutExerciseCard workoutExerciseCard = WorkoutExerciseCard(

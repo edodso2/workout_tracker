@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../services/workout_service.dart';
@@ -18,7 +17,7 @@ class WorkoutsModel extends Model {
     return List.from(_workouts);
   }
 
-  WorkoutsModel({@required this.workoutService});
+  WorkoutsModel({required this.workoutService});
 
   loadWorkouts() {
     loading = true;

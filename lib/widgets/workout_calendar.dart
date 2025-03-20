@@ -6,7 +6,7 @@ import '../scoped_models/workouts.dart';
 import '../widgets/event_calendar/event_calendar.dart';
 
 class WorkoutCalendar extends StatefulWidget {
-  const WorkoutCalendar({Key key}) : super(key: key);
+  const WorkoutCalendar({super.key});
 
   @override
   _WorkoutCalendar createState() => _WorkoutCalendar();
@@ -20,7 +20,7 @@ class _WorkoutCalendar extends State<WorkoutCalendar> {
       child: ScopedModelDescendant<WorkoutsModel>(
         builder: (
           BuildContext context,
-          Widget child,
+          Widget? child,
           WorkoutsModel model,
         ) {
           List<DateTime> markedDates = model.workouts.map((Workout workout) {

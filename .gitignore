@@ -29,6 +29,7 @@ coverage/
 .pub/
 build/
 .flutter-plugins-dependencies
+**/*.mocks.dart
 
 # Android related
 **/android/**/gradle-wrapper.jar

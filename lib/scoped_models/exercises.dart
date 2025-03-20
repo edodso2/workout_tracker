@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../services/exercise_service.dart';
@@ -16,13 +15,7 @@ class ExercisesModel extends Model {
     return List.from(_exercises);
   }
 
-  ExercisesModel({@required this.exerciseService});
-
-  // @override
-  // void addListener(listener) {
-  //   super.addListener(listener);
-  //   loadExercises();
-  // }
+  ExercisesModel({required this.exerciseService});
 
   loadExercises() {
     loading = true;

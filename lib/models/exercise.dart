@@ -1,10 +1,8 @@
-import 'package:flutter/material.dart';
-
 class Exercise {
   final String name;
 
   Exercise({
-    @required this.name,
+    required this.name,
   });
 
   /// Custom comparator logic below so that even if two objects
@@ -26,7 +24,7 @@ class Exercise {
   }
 
   /// Helper toc reate an exercise instance from JSON
-  static Exercise fromJson(Map<String, Object> json) {
+  static Exercise fromJson(Map<String, dynamic> json) {
     return Exercise(
       name: json['name'] as String,
     );

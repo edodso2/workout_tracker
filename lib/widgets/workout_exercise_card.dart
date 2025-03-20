@@ -13,8 +13,8 @@ class WorkoutExerciseCard extends StatelessWidget {
     this.workoutIndex,
     this.exerciseIndex,
     this.exercise, {
-    Key key,
-  }) : super(key: key);
+    super.key
+  });
 
   @override
   Widget build(BuildContext context) {
